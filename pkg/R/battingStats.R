@@ -21,7 +21,9 @@ battingStats <- function(data=Batting,
         x[is.na(x)] <- 0
         x
       }
-#   standard batting variables
+	# keep R CMD check happy
+	AB <- R <- H <- X2B <- X3B <- HR <- RBI <- SH <- BB <- HBP <- SF <- TB <- PA <- OBP <- SlugPct <- SO <- NA
+	#   standard batting variables
     vars <- c('AB', 'R', 'H', 'X2B', 'X3B',
               'HR', 'RBI', 'SB', 'CS', 'BB', 'SO', 'IBB', 'HBP',
               'SH', 'SF', 'GIDP')
