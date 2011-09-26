@@ -5,7 +5,7 @@
 Salaries table
 }
 \description{
-Player salary data
+Player salary data.  
 }
 \usage{data(Salaries)}
 \format{
@@ -18,9 +18,9 @@ Player salary data
     \item{\code{salary}}{Salary}
   }
 }
-%\details{
-%%%  ~~ If necessary, more details than the __description__ above ~~
-%}
+\details{
+There is no real coverage of player's salaries until 1985.
+}
 \source{
 Lahman, S. (2010) Lahman's Baseball Database, 1871-2010, v.5.8, \url{http://baseball1.com/statistics/}
 }
@@ -28,3 +28,17 @@ Lahman, S. (2010) Lahman's Baseball Database, 1871-2010, v.5.8, \url{http://base
 %%  ~~ possibly secondary sources and usages ~~
 %}
 \keyword{datasets}
+
+\examples{
+# what years are included?
+summary(Salaries$year)
+# how many players included each year?
+table(Salaries$year)
+
+# add salary to Batting data
+batting <- merge(Batting, 
+                 Salaries[,c("playerID", "yearID", "teamID", "salary")], 
+                 by=c("playerID", "yearID", "teamID"), all.x=TRUE)
+str(batting)
+}
+

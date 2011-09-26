@@ -16,13 +16,13 @@ Batting table - batting statistics
     \item{\code{stint}}{player's stint (order of appearances within a season)}
     \item{\code{teamID}}{Team; a factor}
     \item{\code{lgID}}{League; a factor with levels \code{AA} \code{AL} \code{FL} \code{NL} \code{PL} \code{UA}}
-    \item{\code{G}}{Games}
+    \item{\code{G}}{Games: number of games in which a player played}
     \item{\code{G_batting}}{Game as batter}
     \item{\code{AB}}{At Bats}
     \item{\code{R}}{Runs}
-    \item{\code{H}}{Hits}
-    \item{\code{X2B}}{Doubles}
-    \item{\code{X3B}}{Triples}
+    \item{\code{H}}{Hits: times reached base because of a batted, fair ball without error by the defense}
+    \item{\code{X2B}}{Doubles: hits on which the batter reached second base safely}
+    \item{\code{X3B}}{Triples: hits on which the batter reached third base safely}
     \item{\code{HR}}{Homeruns}
     \item{\code{RBI}}{Runs Batted In}
     \item{\code{SB}}{Stolen Bases}
@@ -46,9 +46,26 @@ Lahman, S. (2010) Lahman's Baseball Database, 1871-2010, v.5.8, \url{http://base
 %\references{
 %%  ~~ possibly secondary sources and usages ~~
 %}
+\seealso{
+\code{\link[plyr]{baseball}} for a similar dataset, but a subset of players who played 15 or more seasons.
+
+\code{\link[vcd]{Baseball}} for data on batting in the 1987 season.
+
+}
+
 \keyword{datasets}
 
 \examples{
 data(Batting)
 head(Batting)
+
+# calculate batting average and other stats
+batting <- battingStats()
+
+# add salary to Batting data -- wrong
+batting <- merge(batting, 
+                 Salaries[,c("playerID", "yearID", "teamID", "salary")], 
+                 by=c("playerID", "yearID", "teamID"), all.x=TRUE)
+str(batting)
+
 }

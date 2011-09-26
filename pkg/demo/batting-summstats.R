@@ -5,7 +5,7 @@
 
 require('plyr')
 require('reshape2')
-require('data.table')
+#require('data.table')
 #require('ggplot2')
 #require('lattice')
 
