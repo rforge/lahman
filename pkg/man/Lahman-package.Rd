@@ -28,10 +28,11 @@ challenges and opportunities for data processing and visualization in R.
 \tabular{ll}{
 Package: \tab Lahman\cr
 Type: \tab Package\cr
-Version: \tab 1.0-6\cr
-Date: \tab 2011-09-26\cr
+Version: \tab 1.0-7\cr
+Date: \tab 2011-09-27\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
+LazyData: \tab yes\cr
 }
 
 The main form of this database is a relational database in Microsoft Access format.
@@ -55,33 +56,34 @@ A collection of other tables is also provided:
 
 Teams:
 
-%\preformatted{
-  \code{\link{Teams}} - yearly stats and standings;
-  \code{\link{TeamsHalf}} - split season data for teams;
-  \code{\link{TeamsFranchises}} - franchise information;
-%}
+\tabular{ll}{
+  \code{\link{Teams}} \tab yearly stats and standings\cr
+  \code{\link{TeamsHalf}} \tab split season data for teams\cr
+  \code{\link{TeamsFranchises}} \tab franchise information\cr
+}
 
 Post-season play:
 
-%\preformatted{
-  \code{\link{BattingPost}} - post-season batting statistics;
-  \code{\link{PitchingPost}} - post-season pitching statistics;
-  \code{\link{FieldingPost}}- post-season fielding data;
-  \code{\link{SeriesPost}} - post-season series information;
-%}
+\tabular{ll}{
+  \code{\link{BattingPost}} \tab post-season batting statistics\cr
+  \code{\link{PitchingPost}} \tab post-season pitching statistics\cr
+  \code{\link{FieldingPost}}\tab post-season fielding data\cr
+  \code{\link{SeriesPost}} \tab post-season series information\cr
+}
 
 Awards:
 
-  \code{\link{AwardsManagers}} - awards won by managers;
-  \code{\link{AwardsPlayers}} - awards won by players;
-  \code{\link{AwardsShareManagers}} - award voting for manager awards;
-  \code{\link{AwardsSharePlayers}} - award voting for player awards;
-
+\tabular{ll}{
+  \code{\link{AwardsManagers}} \tab awards won by managers\cr
+  \code{\link{AwardsPlayers}} \tab awards won by players\cr
+  \code{\link{AwardsShareManagers}} \tab award voting for manager awards\cr
+  \code{\link{AwardsSharePlayers}} \tab award voting for player awards\cr
+}
 
 Hall of Fame:
 
   \code{\link{HallOfFame}} - Hall of Fame voting data;
-  \code{\link{HOFold}} - old Hall of Fame table
+  \code{\link{HOFold}} - old Hall of Fame table;
 
 
 Others:
@@ -94,6 +96,7 @@ Others:
   \code{\link{Salaries}} - player salary data;
   \code{\link{Appearances}} - data on player appearances;
   \code{\link{Schools}} - Information on schools players attended;
+  \code{\link{SchoolsPlayers}} - Information on schools players attended, by player;
 %}
 
 }

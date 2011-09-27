@@ -1,8 +1,8 @@
 Package: Lahman
 Type: Package
 Title: Sean Lahman's Baseball Database
-Version: 1.0-6
-Date: 2011-09-26
+Version: 1.0-7
+Date: 2011-09-27
 Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre"), email="friendly@yorku.ca"),
             person(given = "Dennis", family = "Murphy", role="ctb"))
 Author: Michael Friendly and Dennis Murphy
@@ -10,7 +10,7 @@ Maintainer: Michael Friendly <friendly@yorku.ca>
 Description: This package provides the tables from Sean Lahman's Baseball Database as a set of R data.frames.
     It uses the data on pitching, hitting and fielding performance and other tables from 1871 through 2010, as recorded
     in version 5.8 of the database.
-Depends: plyr
+Depends: R (>= 2.10), plyr
 Suggests: lattice, ggplot2, googleVis, data.table, vcd
 License: GPL
 LazyLoad: yes
