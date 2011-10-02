@@ -28,8 +28,8 @@ challenges and opportunities for data processing and visualization in R.
 \tabular{ll}{
 Package: \tab Lahman\cr
 Type: \tab Package\cr
-Version: \tab 1.0-7\cr
-Date: \tab 2011-09-27\cr
+Version: \tab 1.0-8\cr
+Date: \tab 2011-10-02\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 LazyData: \tab yes\cr
@@ -80,7 +80,7 @@ Awards:
   \code{\link{AwardsSharePlayers}} \tab award voting for player awards\cr
 }
 
-Hall of Fame:
+Hall of Fame:  links to Master via \code{hofID}
 
   \code{\link{HallOfFame}} - Hall of Fame voting data;
   \code{\link{HOFold}} - old Hall of Fame table;

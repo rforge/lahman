@@ -72,7 +72,7 @@ Lahman, S. (2010) Lahman's Baseball Database, 1871-2010, v.5.8, \url{http://base
 data(Master); data(Batting)
 
 ## add player's name to Batting data
-Master$name <- paste(Master$nameFirst, Master$nameFirst, sep=' ')
+Master$name <- paste(Master$nameFirst, Master$nameLast, sep=' ')
 batting <- merge(Batting, 
                  Master[,c("playerID","name")], 
                  by="playerID", all.x=TRUE)
