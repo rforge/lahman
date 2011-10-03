@@ -50,9 +50,9 @@ where players are identified only by \code{playerID}.
 %    \item{lahman40ID,lahman45ID}{ID used in Lahman Database versions 4.0 and 4.5}
     \item{\code{lahman40ID}}{ID used in Lahman Database version 4.0 }
     \item{\code{lahman45ID}}{ID used in Lahman database version 4.5 }
-    \item{\code{retroID}}{ID used by retrosheet}
+    \item{\code{retroID}}{ID used by retrosheet, \url{http://www.retrosheet.org/}}
     \item{\code{holtzID}}{ID used by Sean Holtz's Baseball Almanac}
-    \item{\code{bbrefID}}{ID used by Baseball Reference website}
+    \item{\code{bbrefID}}{ID used by Baseball Reference website, \url{http://www.baseball-reference.com/}}
     \item{\code{birthDate}}{Player's birthdate, in \code{as.Date} format}
     \item{\code{deathDate}}{Player's deathdate, in \code{as.Date} format}
   }

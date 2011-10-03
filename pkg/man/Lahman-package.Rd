@@ -56,7 +56,7 @@ A collection of other tables is also provided:
 
 Teams:
 
-\tabular{ll}{
+\tabular{rl}{
   \code{\link{Teams}} \tab yearly stats and standings\cr
   \code{\link{TeamsHalf}} \tab split season data for teams\cr
   \code{\link{TeamsFranchises}} \tab franchise information\cr
@@ -64,7 +64,7 @@ Teams:
 
 Post-season play:
 
-\tabular{ll}{
+\tabular{rl}{
   \code{\link{BattingPost}} \tab post-season batting statistics\cr
   \code{\link{PitchingPost}} \tab post-season pitching statistics\cr
   \code{\link{FieldingPost}}\tab post-season fielding data\cr
@@ -73,7 +73,7 @@ Post-season play:
 
 Awards:
 
-\tabular{ll}{
+\tabular{rl}{
   \code{\link{AwardsManagers}} \tab awards won by managers\cr
   \code{\link{AwardsPlayers}} \tab awards won by players\cr
   \code{\link{AwardsShareManagers}} \tab award voting for manager awards\cr
@@ -82,8 +82,10 @@ Awards:
 
 Hall of Fame:  links to Master via \code{hofID}
 
-  \code{\link{HallOfFame}} - Hall of Fame voting data;
-  \code{\link{HOFold}} - old Hall of Fame table;
+\tabular{rl}{
+  \code{\link{HallOfFame}} \tab Hall of Fame voting data\cr
+  \code{\link{HOFold}} \tab old Hall of Fame table\cr
+}
 
 
 Others:

@@ -1,5 +1,6 @@
 Version 1.0-8 (2011-10-02)
 o Added examples in HallOfFame.Rd
+o Fixed definitions of BABIP and OBP in battingStats()
 
 Version 1.0-7 (2011-09-27)
 o Extended examples in Batting.Rd
