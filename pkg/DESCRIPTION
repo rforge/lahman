@@ -1,8 +1,8 @@
 Package: Lahman
 Type: Package
 Title: Sean Lahman's Baseball Database
-Version: 1.0-9
-Date: 2011-11-08
+Version: 1.0-10
+Date: 2012-10-04
 Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre"), email="friendly@yorku.ca"),
             person(given = "Dennis", family = "Murphy", role="ctb"))
 Author: Michael Friendly and Dennis Murphy
