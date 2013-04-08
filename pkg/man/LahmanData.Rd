@@ -10,7 +10,7 @@ It may be useful for computing on the various files.
 }
 \usage{data(LahmanData)}
 \format{
-  A data frame with 27 observations on the following 5 variables.
+  A data frame with 24 observations on the following 5 variables.
   \describe{
     \item{\code{file}}{name of dataset}
     \item{\code{class}}{class of dataset}
@@ -35,7 +35,9 @@ data(LahmanData)
 # find ID variables in the datasets
 IDvars <- lapply(LahmanData[,"file"], function(x) grep('.*ID$', colnames(get(x)), value=TRUE))
 names(IDvars) <- LahmanData[,"file"]
-IDvars
+str(IDvars)
+# vector of unique ID variables
+unique(unlist(IDvars))
 
 # which datasets have playerID?
 names(which(sapply(IDvars, function(x) "playerID" \%in\% x)))
