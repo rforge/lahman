@@ -10,7 +10,7 @@ for those teams in each year.
 }
 \usage{data(Managers)}
 \format{
-  A data frame with 3238 observations on the following 10 variables.
+  A data frame with 3306 observations on the following 10 variables.
   \describe{
     \item{\code{managerID}}{Player ID Number}
     \item{\code{yearID}}{Year}

@@ -9,7 +9,7 @@ Award information for managers awards
 }
 \usage{data(AwardsManagers)}
 \format{
-  A data frame with 57 observations on the following 6 variables.
+  A data frame with 156 observations on the following 6 variables.
   \describe{
     \item{\code{managerID}}{Manager ID code}
     \item{\code{awardID}}{Name of award won}

@@ -9,7 +9,7 @@ Award information for players awards
 }
 \usage{data(AwardsPlayers)}
 \format{
-  A data frame with 2679 observations on the following 6 variables.
+  A data frame with 5920 observations on the following 6 variables.
   \describe{
     \item{\code{playerID}}{Player ID code}
     \item{\code{awardID}}{Name of award won}

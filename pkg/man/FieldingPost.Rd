@@ -9,7 +9,7 @@ Post season fielding data
 }
 \usage{data(FieldingPost)}
 \format{
-  A data frame with 10458 observations on the following 17 variables.
+  A data frame with 11183 observations on the following 17 variables.
   \describe{
     \item{\code{playerID}}{Player ID code}
     \item{\code{yearID}}{Year}

@@ -9,7 +9,7 @@ Post season batting statistics
 }
 \usage{data(BattingPost)}
 \format{
-  A data frame with 9840 observations on the following 22 variables.
+  A data frame with 10510 observations on the following 22 variables.
   \describe{
     \item{\code{yearID}}{Year}
     \item{\code{round}}{Level of playoffs }

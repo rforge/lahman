@@ -9,7 +9,7 @@ Post season pitching statistics
 }
 \usage{data(PitchingPost)}
 \format{
-  A data frame with 4284 observations on the following 30 variables.
+  A data frame with 4612 observations on the following 30 variables.
   \describe{
     \item{\code{playerID}}{Player ID code}
     \item{\code{yearID}}{Year}

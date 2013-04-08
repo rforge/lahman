@@ -10,7 +10,7 @@ Baseball Hall of Fame.
 }
 \usage{data(HallOfFame)}
 \format{
-  A data frame with 3913 observations on the following 8 variables.
+  A data frame with 4015 observations on the following 8 variables.
   \describe{
     \item{\code{hofID}}{Player ID code}
     \item{\code{yearID}}{Year of ballot}
@@ -20,6 +20,7 @@ Baseball Hall of Fame.
     \item{\code{votes}}{Total votes received}
     \item{\code{inducted}}{Whether player was inducted by that vote or not (Y or N)}
     \item{\code{category}}{Category of candidate; a factor with levels \code{Manager} \code{Pioneer/Executive} \code{Player} \code{Umpire}}
+    \item{\code{needed_note}}{Explanation of qualifiers for special elections}
   }
 }
 \details{

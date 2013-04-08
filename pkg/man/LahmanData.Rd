@@ -31,6 +31,7 @@ with some post-processing.
 %}
 \examples{
 data(LahmanData)
+\dontrun{
 # find ID variables in the datasets
 IDvars <- lapply(LahmanData[,"file"], function(x) grep('.*ID$', colnames(get(x)), value=TRUE))
 names(IDvars) <- LahmanData[,"file"]
@@ -38,6 +39,6 @@ IDvars
 
 # which datasets have playerID?
 names(which(sapply(IDvars, function(x) "playerID" \%in\% x)))
-
+}
 }
 \keyword{datasets}

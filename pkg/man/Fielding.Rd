@@ -9,7 +9,7 @@ Fielding table
 }
 \usage{data(Fielding)}
 \format{
-  A data frame with 160710 observations on the following 18 variables.
+  A data frame with 164898 observations on the following 18 variables.
   \describe{
     \item{\code{playerID}}{Player ID code}
     \item{\code{yearID}}{Year}

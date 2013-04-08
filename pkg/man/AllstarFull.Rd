@@ -9,7 +9,7 @@ All Star appearances by players
 }
 \usage{data(AllstarFull)}
 \format{
-  A data frame with 4676 observations on the following 8 variables.
+  A data frame with 4834 observations on the following 8 variables.
   \describe{
     \item{\code{playerID}}{Player ID code}
     \item{\code{yearID}}{Year}

@@ -9,7 +9,7 @@ Player salary data.
 }
 \usage{data(Salaries)}
 \format{
-  A data frame with 21464 observations on the following 5 variables.
+  A data frame with 23141 observations on the following 5 variables.
   \describe{
     \item{\code{yearID}}{Year}
     \item{\code{teamID}}{Team; a factor}

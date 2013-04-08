@@ -9,7 +9,7 @@ Pitching table
 }
 \usage{data(Pitching)}
 \format{
-  A data frame with 40432 observations on the following 30 variables.
+  A data frame with 41857 observations on the following 30 variables.
   \describe{
     \item{\code{playerID}}{Player ID code}
     \item{\code{yearID}}{Year}

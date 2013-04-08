@@ -9,7 +9,7 @@ Batting table - batting statistics
 }
 \usage{data(Batting)}
 \format{
-  A data frame with 93955 observations on the following 24 variables.
+  A data frame with 96600 observations on the following 24 variables.
   \describe{
     \item{\code{playerID}}{Player ID code}
     \item{\code{yearID}}{Year}

@@ -9,7 +9,7 @@ Award voting for managers awards
 }
 \usage{data(AwardsShareManagers)}
 \format{
-  A data frame with 344 observations on the following 7 variables.
+  A data frame with 372 observations on the following 7 variables.
   \describe{
     \item{\code{awardID}}{name of award votes were received for}
     \item{\code{yearID}}{Year}

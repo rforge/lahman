@@ -9,7 +9,7 @@ Post season series information
 }
 \usage{data(SeriesPost)}
 \format{
-  A data frame with 256 observations on the following 9 variables.
+  A data frame with 272 observations on the following 9 variables.
   \describe{
     \item{\code{yearID}}{Year}
     \item{\code{round}}{Level of playoffs }

@@ -10,15 +10,15 @@ Data on player appearances
 
 \usage{data(Appearances)}
 \format{
-  A data frame with 94157 observations on the following 20 variables.
+  A data frame with 96737 observations on the following 20 variables.
   \describe{
     \item{\code{yearID}}{Year}
     \item{\code{teamID}}{Team; a factor}
     \item{\code{lgID}}{League; a factor with levels \code{AA} \code{AL} \code{FL} \code{NL} \code{PL} \code{UA}}
     \item{\code{playerID}}{Player ID code}
-    \item{\code{career_year}}{Player ID code}
+%    \item{\code{career_year}}{Player ID code}
     \item{\code{G_all}}{Total games played}
-    \item{\code{G_start}}{Games started}
+    \item{\code{GS}}{Games started}
     \item{\code{G_batting}}{Games in which player batted}
     \item{\code{G_defense}}{Games in which player appeared on defense}
     \item{\code{G_p}}{Games as pitcher}
@@ -32,8 +32,8 @@ Data on player appearances
     \item{\code{G_rf}}{Games as right fielder}
     \item{\code{G_of}}{Games as outfielder}
     \item{\code{G_dh}}{Games as designated hitter}
-%    \item{\code{G_ph}}{Games as pinch hitter}
-%    \item{\code{G_pr}}{Games as pinch runner}
+    \item{\code{G_ph}}{Games as pinch hitter}
+    \item{\code{G_pr}}{Games as pinch runner}
   }
 }
 \details{
