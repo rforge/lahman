@@ -2,7 +2,7 @@
 \alias{HallOfFame}
 \docType{data}
 \title{
-Hall of Fame table
+Hall of Fame Voting Data
 }
 \description{
 Hall of Fame table. This is comprised of the voting results for all candidates nominated for the

@@ -61,7 +61,7 @@ where players are identified only by \code{playerID}.
 \code{debut}, \code{finalGame} were converted from character strings with \code{as.Date}.
 }
 \source{
-Lahman, S. (2010) Lahman's Baseball Database, 1871-2010, v.5.8, \url{http://baseball1.com/statistics/}
+Lahman, S. (2010) Lahman's Baseball Database, 1871-2012, 2012 version, \url{http://baseball1.com/statistics/}
 }
 %\references{
 %%  ~~ possibly secondary sources and usages ~~
