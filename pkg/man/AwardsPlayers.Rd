@@ -48,5 +48,15 @@ goldglove <- subset(AwardsPlayers, awardID == 'Gold Glove')
 GGcount <- table(goldglove$playerID)
 GGcount[GGcount>10]
 
+# Triple Crown winners
+subset(AwardsPlayers, awardID == "Triple Crown")
+
+# Simultaneous Triple Crown and MVP winners
+# (compare merged file to TC)
+TC <- subset(AwardsPlayers, awardID == "Triple Crown")
+MVP <- subset(AwardsPlayers, awardID == "Most Valuable Player")
+keepvars <- c("playerID", "yearID", "lgID.x")
+merge(TC, MVP, by = c("playerID", "yearID"))[ ,keepvars]
+
 
 }

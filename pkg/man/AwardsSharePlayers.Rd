@@ -29,4 +29,41 @@ Lahman, S. (2010) Lahman's Baseball Database, 1871-2012, 2012 version, \url{http
 %\references{
 %%  ~~ possibly secondary sources and usages ~~
 %}
+\examples{
+# Vote tallies for post-season player awards
+
+require(plyr)
+
+# Which awards are represented in this data frame?
+unique(AwardsSharePlayers$awardID)
+
+# Sort the votes for the Cy Young award in decreasing order.
+# For the first few years, the award went to the best pitcher
+# in both leagues.
+
+cyvotes <- ddply(subset(AwardsSharePlayers, awardID == "Cy Young"),
+                 .(yearID, lgID), arrange, desc(pointsWon))
+
+# 2012 votes
+subset(cyvotes, yearID == 2012)
+
+# top three votegetters each year by league
+
+cya_top3 <- ddply(cyvotes, .(yearID, lgID), function(d) head(d, 3))
+
+# unanimous Cy Young winners
+subset(cyvotes, pointsWon == pointsMax)
+
+# Top five pitchers with most top 3 vote tallies in CYA
+head(with(cya_top3, rev(sort(table(playerID)))), 5)
+
+# Ditto for MVP awards
+
+MVP <- subset(AwardsSharePlayers, awardID == "MVP")
+MVP_top3 <- ddply(MVP, .(yearID, lgID), 
+                  function(d) head(arrange(d, desc(pointsWon)), 3))
+head(with(MVP_top3, rev(sort(table(playerID)))), 5)
+
+}
+
 \keyword{datasets}

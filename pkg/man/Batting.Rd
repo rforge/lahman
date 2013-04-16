@@ -60,6 +60,7 @@ Lahman, S. (2010) Lahman's Baseball Database, 1871-2012, 2012 version, \url{http
 \examples{
 data(Batting)
 head(Batting)
+require('plyr')
 
 # calculate batting average and other stats
 batting <- battingStats()
@@ -88,7 +89,6 @@ batting <- arrange(batting, playerID, yearID, stint)
 # for the season - in a normal year, the minimum number of plate appearances is 502)
 eligibleHitters <- subset(batting, yearID >= 1900 & PA > 450)
 
-require('plyr')
 # Find the hitters with the highest BA in MLB each year (there are a
 # few ties).  Include all players with BA > .400
 topHitters <- ddply(eligibleHitters, .(yearID), subset, (BA == max(BA))|BA > .400)

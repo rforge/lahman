@@ -59,5 +59,41 @@ subset(Appearances, playerID == 'washihe01')
 subset(Appearances, playerID == 'thomeji01')
 subset(Appearances, playerID == 'hairsje02')
 
+# Appearances for the 1984 Cleveland Indians
+subset(Appearances, teamID == "CLE" & yearID == 1984)
+
+
+if (require(reshape2) & require(plyr)) {
+# Appearances for Pete Rose during his career:
+prose <- subset(Appearances, playerID == "rosepe01")
+
+
+# What was Pete Rose's primary position each year 
+# of his career?
+
+prose_melt <- melt(prose, id = c("yearID", "teamID"),
+                          measure = 9:17)
+# Split out the position from variable
+prose_melt <- cbind(prose_melt, colsplit(prose_melt$variable, 
+                                         "_", names = c("G", "pos")))
+
+# Two grouping variables because of an in-season trade in 1984
+primary_pos <- ddply(prose_melt, .(yearID, teamID), summarise,
+                         top_pos = pos[which.max(value)],
+                         games = max(value))
+primary_pos
+
+# Most pitcher appearances each year since 1950
+ddply(subset(Appearances, yearID >= 1950), .(yearID), summarise,
+                              maxPitcher = playerID[which.max(G_p)],
+                              maxAppear = max(G_p))
+
+# Individuals who have played all 162 games since 1961
+all162 <- ddply(subset(Appearances, yearID > 1960), .(yearID), summarise,
+                      allGamers = playerID[G_all == 162])
+# Number of all-gamers by year
+table(all162$yearID)
+}
+
 }
 
