@@ -41,6 +41,7 @@ length(player_appearances)
 
 # density plot of the whole distribution
 plot(density(player_appearances), main="Player appearances in All Star Games")
+rug(jitter(player_appearances))
 
 # who has played in more than 10 ASGs?
 player_appearances[player_appearances > 10]
