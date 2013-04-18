@@ -1,4 +1,5 @@
 # all the rest is data
 export(battingStats,
-	playerInfo,teamInfo
+	playerInfo,teamInfo,
+	Label
 	)
