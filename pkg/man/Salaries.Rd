@@ -31,14 +31,31 @@ Lahman, S. (2010) Lahman's Baseball Database, 1871-2012, 2012 version, \url{http
 
 \examples{
 # what years are included?
-summary(Salaries$year)
+summary(Salaries$yearID)
 # how many players included each year?
-table(Salaries$year)
+table(Salaries$yearID)
 
 # add salary to Batting data
 batting <- merge(Batting, 
                  Salaries[,c("playerID", "yearID", "teamID", "salary")], 
                  by=c("playerID", "yearID", "teamID"), all.x=TRUE)
 str(batting)
+
+#######################################
+# Average salaries by teams, over years
+#######################################
+
+require(plyr)
+avesal <- ddply(Salaries, .(yearID, teamID, lgID), summarise, 
+	salary= mean(salary)/100000)
+
+# remove infrequent teams
+tcount <- table(avesal$teamID)
+avesal <- subset(avesal, avesal$teamID \%in\% names(tcount)[tcount>=15], drop=TRUE)
+avesal$teamID <- factor(avesal$teamID, levels=names(tcount)[tcount>=15])
+
+require(lattice)
+xyplot(salary ~ yearID | teamID, data=avesal, ylab="Salary (100,000$)")
+
 }
 
