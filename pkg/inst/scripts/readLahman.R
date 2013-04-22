@@ -66,6 +66,8 @@ Master <- within(Master, {
                        format = '%Y-%m-%d')
    deathDate = as.Date(paste(deathYear, deathMonth, deathDay, sep = '-'),
                        format = '%Y-%m-%d')
+   bats = factor(bats)
+   throws = factor(throws)
 }  )
 
 #* checking data for non-ASCII characters ... WARNING
