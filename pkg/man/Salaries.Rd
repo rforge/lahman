@@ -35,6 +35,27 @@ summary(Salaries$yearID)
 # how many players included each year?
 table(Salaries$yearID)
 
+# Team salary data
+
+require(plyr)
+
+# Total team salaries by league, team and year
+teamSalaries <- ddply(Salaries, .(lgID, teamID, yearID), summarise,
+                       Salary = sum(as.numeric(salary)))
+
+# Arrange in decreasing order within year and league:
+teamSalaries <- ddply(teamSalaries, .(yearID, lgID), arrange, desc(Salary))
+
+#######################################
+# Highest paid players each year:
+maxSal <- ddply(Salaries, .(yearID), subset, salary == max(salary))
+names <- apply(t(sapply(maxSal$playerID, playerInfo))[,2:3], 2, paste)
+maxSal <- cbind(maxSal, names)
+maxSal
+plot(salary/100000 ~ yearID, data=maxSal, type='b', ylab='Salary (100,000$)')
+# see the whole distribution
+boxplot(salary/100000 ~ yearID, data=Salaries, col="lightblue")
+
 # add salary to Batting data
 batting <- merge(Batting, 
                  Salaries[,c("playerID", "yearID", "teamID", "salary")], 

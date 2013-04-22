@@ -1,6 +1,6 @@
 Version 2.0-1 (2013-04-18)
 o Added Label() and data frames for variable labels
-o Added more examples
+o Added more examples and plots to Salaries, Pitching, etc. from Dennis Murphy
 
 Version 2.0-0 (2013-04-08)
 o New major version, now reflecting the 2012 Lahman database.  Some deprecated or defunct
