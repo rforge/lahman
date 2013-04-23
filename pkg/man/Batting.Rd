@@ -127,4 +127,23 @@ ggplot(topHitters, aes(x = yearID, y = BA)) +
     geom_smooth() +
     theme(legend.position = 'none')
 
+##########################################################
+# after Chris Green,
+# http://sabr.org/research/baseball-s-first-power-surge-home-runs-late-19th-century-major-leagues
+
+# Total home runs by year
+totalHR <- ddply(Batting, .(yearID), summarise,
+                       HomeRuns = sum(as.numeric(HR), na.rm=TRUE),
+                       Games = sum(as.numeric(G_batting), na.rm=TRUE)
+                       )
+
+plot(HomeRuns ~ yearID, data=subset(totalHR, yearID<=1918))
+# take games into account?
+plot(HomeRuns/Games ~ yearID, data=subset(totalHR, yearID<=1918))
+
+# long term trend?
+plot(HomeRuns ~ yearID, data=totalHR)
+plot(HomeRuns/Games ~ yearID, data=totalHR)
+
+
 }
