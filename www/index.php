@@ -47,13 +47,13 @@ echo $contents; } ?>
 <table>
 <tr>
   <td>
-  <a href="html/Batting.html"><img src="html/figure/Batting-unnamed-chunk-1.png" width=160></a>
+  <a href="doc/Batting.html"><img src="doc/figure/Batting-unnamed-chunk-1.png" width=160></a>
   </td>
   <td>
-  <a href="html/HallOfFame.html"><img src="html/figure/HallOfFame-unnamed-chunk-12.png" width=160></a>
+  <a href="doc/HallOfFame.html"><img src="doc/figure/HallOfFame-unnamed-chunk-12.png" width=160></a>
   </td>
   <td>
-  <a href="html/Master.html"><img src="html/figure/Master-unnamed-chunk-1.png" width=160></a>
+  <a href="doc/Master.html"><img src="doc/figure/Master-unnamed-chunk-1.png" width=160></a>
   </td>
 </tr>
 </table>
