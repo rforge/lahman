@@ -44,6 +44,20 @@ echo $contents; } ?>
 
 <!-- end of project description -->
 
+<table>
+<tr>
+  <td>
+  <a href="html/Batting.html"><img src="html/figure/Batting-unnamed-chunk-1.png" width=160></a>
+  </td>
+  <td>
+  <a href="html/HallOfFame.html"><img src="html/figure/HallOfFame-unnamed-chunk-12.png" width=160></a>
+  </td>
+  <td>
+  <a href="html/Master.html"><img src="html/figure/Master-unnamed-chunk-1.png" width=160></a>
+  </td>
+</tr>
+</table>
+
 <h2>Contents</h2>
 
 <ul>
