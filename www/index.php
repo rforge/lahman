@@ -47,14 +47,13 @@ echo $contents; } ?>
 <h2>Contents</h2>
 
 <ul>
-  <li>The <strong>project summary page</strong> you can find <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>here</strong></a>.</li>
-  <li><a href=""doc/">HTML documentation for the Lahman package</a>, with the results of all examples.</li>
+  <li>The <strong>R-Forge project summary page</strong> is <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>here</strong></a>.</li>
+  <li><a href="doc/">HTML documentation for the Lahman package</a>, with the results of all examples.</li>
   <li>Other examples, analyses, etc. [none yet]
 </ul>
 
 
 
-<p> The <strong>project summary page</strong> you can find <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>here</strong></a>. </p>
 
 </body>
 </html>
