@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: AwardsPlayers table</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="highlight.css">
+<script src="highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for AwardsPlayers {Lahman}"><tr><td>AwardsPlayers {Lahman}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+AwardsPlayers table 
+</h2>
+
+<h3>Description</h3>
+
+
+<p>Award information for players awards
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(AwardsPlayers)</pre>
+
+
+<h3>Format</h3>
+
+
+<p>A data frame with 5920 observations on the following 6 variables.
+</p>
+
+<dl>
+<dt><code>playerID</code></dt><dd><p>Player ID code</p>
+</dd>
+<dt><code>awardID</code></dt><dd><p>Name of award won</p>
+</dd>
+<dt><code>yearID</code></dt><dd><p>Year</p>
+</dd>
+<dt><code>lgID</code></dt><dd><p>League; a factor with levels <code>AA</code> <code>AL</code> <code>ML</code> <code>NL</code></p>
+</dd>
+<dt><code>tie</code></dt><dd><p>Award was a tie (Y or N)</p>
+</dd>
+<dt><code>notes</code></dt><dd><p>Notes about the award</p>
+</dd>
+</dl>
+
+
+
+<h3>Source</h3>
+
+
+<p>Lahman, S. (2010) Lahman's Baseball Database, 1871-2012, 2012 version, <a href="http://baseball1.com/statistics/">http://baseball1.com/statistics/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+data(AwardsPlayers)
+# Which awards have been given and how many?
+with(AwardsPlayers, table(awardID))
+</code></pre>
+
+<pre><code>## awardID
+##                            ALCS MVP                   All-Star Game MVP 
+##                                  32                                  52 
+##                     Babe Ruth Award          Baseball Magazine All-Star 
+##                                  64                                1520 
+##                 Branch Rickey Award         Comeback Player of the Year 
+##                                  21                                  16 
+##                      Cy Young Award                          Gold Glove 
+##                                 104                                1001 
+##                    Hank Aaron Award                         Hutch Award 
+##                                  28                                  48 
+##           Lou Gehrig Memorial Award                Most Valuable Player 
+##                                  57                                 186 
+##                            NLCS MVP               Pitching Triple Crown 
+##                                  36                                  38 
+##              Roberto Clemente Award            Rolaids Relief Man Award 
+##                                  42                                  74 
+##                  Rookie of the Year                      Silver Slugger 
+##                                 132                                 595 
+##                        Triple Crown                        TSN All-Star 
+##                                  17                                1351 
+##             TSN Fireman of the Year                       TSN Guide MVP 
+##                                  88                                  33 
+## TSN Major League Player of the Year             TSN Pitcher of the Year 
+##                                  78                                 135 
+##              TSN Player of the Year            TSN Reliever of the Year 
+##                                  92                                  20 
+##                    World Series MVP 
+##                                  60
+</code></pre>
+
+<pre><code class="r">awardtab &lt;- with(AwardsPlayers, table(awardID))
+library(&#39;lattice&#39;)
+</code></pre>
+
+<pre><code>## Warning: package &#39;lattice&#39; was built under R version 2.15.3
+</code></pre>
+
+<pre><code class="r">dotplot(awardtab)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">
+# Restrict to MVP awards
+mvp &lt;- subset(AwardsPlayers, awardID == &#39;MVP&#39;)
+# Who won in 1994?
+mvp[mvp$yearID == 1994L, ]
+</code></pre>
+
+<pre><code>## [1] playerID awardID  yearID   lgID     tie      notes   
+## &lt;0 rows&gt; (or 0-length row.names)
+</code></pre>
+
+<pre><code class="r">
+goldglove &lt;- subset(AwardsPlayers, awardID == &#39;Gold Glove&#39;)
+# which players won most often?
+GGcount &lt;- table(goldglove$playerID)
+GGcount[GGcount&gt;10]
+</code></pre>
+
+<pre><code>## 
+## clemero01 hernake01  kaatji01 maddugr01  mayswi01 robinbr01 rodriiv01 
+##        12        11        16        18        12        16        13 
+## smithoz01 vizquom01 
+##        13        11
+</code></pre>
+
+<pre><code class="r">
+# Triple Crown winners
+subset(AwardsPlayers, awardID == &quot;Triple Crown&quot;)
+</code></pre>
+
+<pre><code>##       playerID      awardID yearID lgID  tie notes
+## 2605 hinespa01 Triple Crown   1878   NL &lt;NA&gt;  &lt;NA&gt;
+## 2606 oneilti01 Triple Crown   1887   AA &lt;NA&gt;  &lt;NA&gt;
+## 2607 duffyhu01 Triple Crown   1894   NL &lt;NA&gt;  &lt;NA&gt;
+## 2608 lajoina01 Triple Crown   1901   AL &lt;NA&gt;  &lt;NA&gt;
+## 2609  cobbty01 Triple Crown   1909   AL &lt;NA&gt;  &lt;NA&gt;
+## 2610 hornsro01 Triple Crown   1922   NL &lt;NA&gt;  &lt;NA&gt;
+## 2611 hornsro01 Triple Crown   1925   NL &lt;NA&gt;  &lt;NA&gt;
+## 2612  foxxji01 Triple Crown   1933   AL &lt;NA&gt;  &lt;NA&gt;
+## 2613 kleinch01 Triple Crown   1933   NL &lt;NA&gt;  &lt;NA&gt;
+## 2614 gehrilo01 Triple Crown   1934   AL &lt;NA&gt;  &lt;NA&gt;
+## 2615 medwijo01 Triple Crown   1937   NL &lt;NA&gt;  &lt;NA&gt;
+## 2616 willite01 Triple Crown   1942   AL &lt;NA&gt;  &lt;NA&gt;
+## 2617 willite01 Triple Crown   1947   AL &lt;NA&gt;  &lt;NA&gt;
+## 2618 mantlmi01 Triple Crown   1956   AL &lt;NA&gt;  &lt;NA&gt;
+## 2619 robinfr02 Triple Crown   1966   AL &lt;NA&gt;  &lt;NA&gt;
+## 2620 yastrca01 Triple Crown   1967   AL &lt;NA&gt;  &lt;NA&gt;
+## 2621 cabremi01 Triple Crown   2012   NL &lt;NA&gt;  &lt;NA&gt;
+</code></pre>
+
+<pre><code class="r">
+# Simultaneous Triple Crown and MVP winners
+# (compare merged file to TC)
+TC &lt;- subset(AwardsPlayers, awardID == &quot;Triple Crown&quot;)
+MVP &lt;- subset(AwardsPlayers, awardID == &quot;Most Valuable Player&quot;)
+keepvars &lt;- c(&quot;playerID&quot;, &quot;yearID&quot;, &quot;lgID.x&quot;)
+merge(TC, MVP, by = c(&quot;playerID&quot;, &quot;yearID&quot;))[ ,keepvars]
+</code></pre>
+
+<pre><code>##    playerID yearID lgID.x
+## 1 cabremi01   2012     NL
+## 2  foxxji01   1933     AL
+## 3 hornsro01   1925     NL
+## 4 mantlmi01   1956     AL
+## 5 medwijo01   1937     NL
+## 6 robinfr02   1966     AL
+## 7 yastrca01   1967     AL
+</code></pre>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>Lahman</em> version 2.0-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

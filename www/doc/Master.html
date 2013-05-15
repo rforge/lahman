@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Master table</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="highlight.css">
+<script src="highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for Master {Lahman}"><tr><td>Master {Lahman}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+Master table
+</h2>
+
+<h3>Description</h3>
+
+
+<p>Master table - Player names, DOB, and biographical info.  This file is to be used to get details
+about players listed in the <code><a href="Batting.html">Batting</a></code>, <code><a href="Pitching.html">Pitching</a></code>, and other files
+where players are identified only by <code>playerID</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(Master)</pre>
+
+
+<h3>Format</h3>
+
+
+<p>A data frame with 18125 observations on the following 35 variables.
+</p>
+
+<dl>
+<dt><code>lahmanID</code></dt><dd><p>Unique number assigned to each player</p>
+</dd>
+<dt><code>playerID</code></dt><dd><p>A unique code asssigned to each player.  The <code>playerID</code> links
+the data in this file with records on players in the other files.</p>
+</dd>
+<dt><code>managerID</code></dt><dd><p>An ID for individuals who served as managers. Links to information in the 
+<code><a href="Managers.html">Managers</a></code>, <code><a href="ManagersHalf.html">ManagersHalf</a></code> and other files dealing with managers.</p>
+</dd>
+<dt><code>hofID</code></dt><dd><p>An ID for individuals who are in the baseball Hall of Fame. Links to information
+in the <code><a href="HallOfFame.html">HallOfFame</a></code> file.</p>
+</dd>
+<dt><code>birthYear</code></dt><dd><p>Year player was born</p>
+</dd>
+<dt><code>birthMonth</code></dt><dd><p>Month player was born</p>
+</dd>
+<dt><code>birthDay</code></dt><dd><p>Day player was born</p>
+</dd>
+<dt><code>birthCountry</code></dt><dd><p>Country where player was born</p>
+</dd>
+<dt><code>birthState</code></dt><dd><p>State where player was born</p>
+</dd>
+<dt><code>birthCity</code></dt><dd><p>City where player was born</p>
+</dd>
+<dt><code>deathYear</code></dt><dd><p>Year player died</p>
+</dd>
+<dt><code>deathMonth</code></dt><dd><p>Month player died</p>
+</dd>
+<dt><code>deathDay</code></dt><dd><p>Day player died</p>
+</dd>
+<dt><code>deathCountry</code></dt><dd><p>Country where player died</p>
+</dd>
+<dt><code>deathState</code></dt><dd><p>State where player died</p>
+</dd>
+<dt><code>deathCity</code></dt><dd><p>City where player died</p>
+</dd>
+<dt><code>nameFirst</code></dt><dd><p>Player's first name</p>
+</dd>
+<dt><code>nameLast</code></dt><dd><p>Player's last name</p>
+</dd>
+<dt><code>nameNote</code></dt><dd><p>Note about player's name (usually signifying that they changed
+their name or played under two differnt names)</p>
+</dd>
+<dt><code>nameGiven</code></dt><dd><p>Player's given name (typically first and middle)</p>
+</dd>
+<dt><code>nameNick</code></dt><dd><p>Player's nickname</p>
+</dd>
+<dt><code>weight</code></dt><dd><p>Player's weight in pounds</p>
+</dd>
+<dt><code>height</code></dt><dd><p>Player's height in inches</p>
+</dd>
+<dt><code>bats</code></dt><dd><p>Player's batting hand (left (L), right (R), or both (B))         </p>
+</dd>
+<dt><code>throws</code></dt><dd><p>Player's throwing hand (left or right)</p>
+</dd>
+<dt><code>debut</code></dt><dd><p>Date that player made first major league appearance</p>
+</dd>
+<dt><code>finalGame</code></dt><dd><p>Date that player made first major league appearance (blank if still active)</p>
+</dd>
+<dt><code>college</code></dt><dd><p>College attended.  Further information in <code><a href="Schools.html">Schools</a></code> and <code><a href="SchoolsPlayers.html">SchoolsPlayers</a></code>,
+but not linked in the Master file by <code>schoolID</code></p>
+</dd>
+</dl>
+
+<dl>
+<dt><code>lahman40ID</code></dt><dd><p>ID used in Lahman Database version 4.0 </p>
+</dd>
+<dt><code>lahman45ID</code></dt><dd><p>ID used in Lahman database version 4.5 </p>
+</dd>
+<dt><code>retroID</code></dt><dd><p>ID used by retrosheet, <a href="http://www.retrosheet.org/">http://www.retrosheet.org/</a></p>
+</dd>
+<dt><code>holtzID</code></dt><dd><p>ID used by Sean Holtz's Baseball Almanac</p>
+</dd>
+<dt><code>bbrefID</code></dt><dd><p>ID used by Baseball Reference website, <a href="http://www.baseball-reference.com/">http://www.baseball-reference.com/</a></p>
+</dd>
+<dt><code>birthDate</code></dt><dd><p>Player's birthdate, in <code>as.Date</code> format</p>
+</dd>
+<dt><code>deathDate</code></dt><dd><p>Player's deathdate, in <code>as.Date</code> format</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+
+<p><code>debut</code>, <code>finalGame</code> were converted from character strings with <code>as.Date</code>.
+</p>
+
+
+<h3>Source</h3>
+
+
+<p>Lahman, S. (2010) Lahman's Baseball Database, 1871-2012, 2012 version, <a href="http://baseball1.com/statistics/">http://baseball1.com/statistics/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+data(Master); data(Batting)
+
+## add player&#39;s name to Batting data
+Master$name &lt;- paste(Master$nameFirst, Master$nameLast, sep=&#39; &#39;)
+batting &lt;- merge(Batting, 
+                 Master[,c(&quot;playerID&quot;,&quot;name&quot;)], 
+                 by=&quot;playerID&quot;, all.x=TRUE)
+
+## batting and throwing
+# right-handed batters are much less ambidexterous in throwing than left-handed batters
+BT &lt;- with(Master, table(bats, throws))
+library(vcd)
+mosaic(BT, shade=TRUE)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">
+## Who is Shoeless Joe Jackson?
+subset(Master, nameLast==&quot;Jackson&quot; &amp; nameFirst==&quot;Joe&quot;)
+</code></pre>
+
+<pre><code>##      lahmanID  playerID managerID      hofID birthYear birthMonth birthDay
+## 6837     6843 jacksjo01      &lt;NA&gt; jacksjo01h      1889          7       16
+##      birthCountry birthState      birthCity deathYear deathMonth deathDay
+## 6837          USA         SC Pickens County      1951         12        5
+##      deathCountry deathState  deathCity nameFirst nameLast nameNote
+## 6837          USA         SC Greenville       Joe  Jackson     &lt;NA&gt;
+##             nameGiven     nameNick weight height bats throws debut
+## 6837 Joseph Jefferson Shoeless Joe    200     73    L      R  &lt;NA&gt;
+##      finalGame college lahman40ID lahman45ID  retroID   holtzID   bbrefID
+## 6837      &lt;NA&gt;    &lt;NA&gt;  jacksjo01  jacksjo01 jackj101 jacksjo01 jacksjo01
+##       deathDate  birthDate        name
+## 6837 1951-12-05 1889-07-16 Joe Jackson
+</code></pre>
+
+<pre><code class="r">joeID &lt;-c(subset(Master, nameLast==&quot;Jackson&quot; &amp; nameFirst==&quot;Joe&quot;)[&quot;playerID&quot;])
+
+subset(Batting, playerID==joeID)
+</code></pre>
+
+<pre><code>##        playerID yearID stint teamID lgID   G G_batting  AB   R   H X2B X3B
+## 41979 jacksjo01   1908     1    PHA   AL   5         5  23   0   3   0   0
+## 41980 jacksjo01   1909     1    PHA   AL   5         5  17   3   3   0   0
+## 41981 jacksjo01   1910     1    CLE   AL  20        20  75  15  29   2   5
+## 41982 jacksjo01   1911     1    CLE   AL 147       147 571 126 233  45  19
+## 41983 jacksjo01   1912     1    CLE   AL 154       154 572 121 226  44  26
+## 41984 jacksjo01   1913     1    CLE   AL 148       148 528 109 197  39  17
+## 41985 jacksjo01   1914     1    CLE   AL 122       122 453  61 153  22  13
+## 41986 jacksjo01   1915     1    CLE   AL  83        83 303  42  99  16   9
+## 41987 jacksjo01   1915     2    CHA   AL  45        45 158  21  43   4   5
+## 41988 jacksjo01   1916     1    CHA   AL 155       155 592  91 202  40  21
+## 41989 jacksjo01   1917     1    CHA   AL 146       146 538  91 162  20  17
+## 41990 jacksjo01   1918     1    CHA   AL  17        17  65   9  23   2   2
+## 41991 jacksjo01   1919     1    CHA   AL 139       139 516  79 181  31  14
+## 41992 jacksjo01   1920     1    CHA   AL 146       146 570 105 218  42  20
+##       HR RBI SB CS BB SO IBB HBP SH SF GIDP G_old
+## 41979  0   3  0 NA  0 NA  NA   0  0 NA   NA     5
+## 41980  0   3  0 NA  1 NA  NA   0  0 NA   NA     5
+## 41981  1  11  4 NA  8 NA  NA   0  3 NA   NA    20
+## 41982  7  83 41 NA 56 NA  NA   8  6 NA   NA   147
+## 41983  3  90 35 NA 54 NA  NA  12 15 NA   NA   154
+## 41984  7  71 26 NA 80 26  NA   5 10 NA   NA   148
+## 41985  3  53 22 15 41 34  NA   5 13 NA   NA   122
+## 41986  3  45 10 10 28 11  NA   3  3 NA   NA    83
+## 41987  2  36  6 10 24 12  NA   3  8 NA   NA    45
+## 41988  3  78 24 14 46 25  NA   5 16 NA   NA   155
+## 41989  5  75 13 NA 57 25  NA   7 19 NA   NA   146
+## 41990  1  20  3 NA  8  1  NA   0  5 NA   NA    17
+## 41991  7  96  9 NA 60 10  NA   4 17 NA   NA   139
+## 41992 12 121  9 12 56 14  NA   7 16 NA   NA   146
+</code></pre>
+
+<pre><code class="r">subset(Fielding, playerID==joeID)
+</code></pre>
+
+<pre><code>##        playerID yearID stint teamID lgID POS   G GS InnOuts  PO  A  E DP
+## 72399 jacksjo01   1908     1    PHA   AL  OF   5 NA      NA   6  1  1  0
+## 72400 jacksjo01   1909     1    PHA   AL  OF   4 NA      NA  10  0  2  0
+## 72401 jacksjo01   1910     1    CLE   AL  OF  20 NA      NA  40  2  1  1
+## 72402 jacksjo01   1911     1    CLE   AL  OF 147 NA      NA 242 32 12  8
+## 72403 jacksjo01   1912     1    CLE   AL  OF 150 NA      NA 273 30 16  2
+## 72404 jacksjo01   1913     1    CLE   AL  OF 148 NA      NA 211 28 18  5
+## 72405 jacksjo01   1914     1    CLE   AL  OF 119 NA      NA 195 13  7  4
+## 72406 jacksjo01   1915     1    CLE   AL  1B  30 NA      NA 284 15  7 12
+## 72407 jacksjo01   1915     1    CLE   AL  OF  50 NA      NA  68  6  3  0
+## 72408 jacksjo01   1915     2    CHA   AL  OF  45 NA      NA  84  6  5  1
+## 72409 jacksjo01   1916     1    CHA   AL  OF 155 NA      NA 290 17  8  5
+## 72410 jacksjo01   1917     1    CHA   AL  OF 145 NA      NA 341 18  6  4
+## 72411 jacksjo01   1918     1    CHA   AL  OF  17 NA      NA  36  1  0  0
+## 72412 jacksjo01   1919     1    CHA   AL  OF 139 NA      NA 252 15  9  4
+## 72413 jacksjo01   1920     1    CHA   AL  OF 145 NA      NA 314 14 12  2
+##       PB WP SB CS ZR
+## 72399 NA NA NA NA NA
+## 72400 NA NA NA NA NA
+## 72401 NA NA NA NA NA
+## 72402 NA NA NA NA NA
+## 72403 NA NA NA NA NA
+## 72404 NA NA NA NA NA
+## 72405 NA NA NA NA NA
+## 72406 NA NA NA NA NA
+## 72407 NA NA NA NA NA
+## 72408 NA NA NA NA NA
+## 72409 NA NA NA NA NA
+## 72410 NA NA NA NA NA
+## 72411 NA NA NA NA NA
+## 72412 NA NA NA NA NA
+## 72413 NA NA NA NA NA
+</code></pre>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>Lahman</em> version 2.0-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

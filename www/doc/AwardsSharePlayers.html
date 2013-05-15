@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: AwardsSharePlayers table</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="highlight.css">
+<script src="highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for AwardsSharePlayers {Lahman}"><tr><td>AwardsSharePlayers {Lahman}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+AwardsSharePlayers table
+</h2>
+
+<h3>Description</h3>
+
+
+<p>Award voting for managers awards
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(AwardsSharePlayers)</pre>
+
+
+<h3>Format</h3>
+
+
+<p>A data frame with 6531 observations on the following 7 variables.
+</p>
+
+<dl>
+<dt><code>awardID</code></dt><dd><p>name of award votes were received for</p>
+</dd>
+<dt><code>yearID</code></dt><dd><p>Year</p>
+</dd>
+<dt><code>lgID</code></dt><dd><p>League; a factor with levels <code>AL</code> <code>ML</code> <code>NL</code></p>
+</dd>
+<dt><code>playerID</code></dt><dd><p>Player ID code</p>
+</dd>
+<dt><code>pointsWon</code></dt><dd><p>Number of points received</p>
+</dd>
+<dt><code>pointsMax</code></dt><dd><p>Maximum numner of points possible</p>
+</dd>
+<dt><code>votesFirst</code></dt><dd><p>Number of first place votes</p>
+</dd>
+</dl>
+
+
+
+<h3>Source</h3>
+
+
+<p>Lahman, S. (2010) Lahman's Baseball Database, 1871-2012, 2012 version, <a href="http://baseball1.com/statistics/">http://baseball1.com/statistics/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+# Vote tallies for post-season player awards
+
+require(plyr)
+
+# Which awards are represented in this data frame?
+unique(AwardsSharePlayers$awardID)
+</code></pre>
+
+<pre><code>## [1] &quot;Cy Young&quot;           &quot;MVP&quot;                &quot;Rookie of the Year&quot;
+</code></pre>
+
+<pre><code class="r">
+# Sort the votes for the Cy Young award in decreasing order.
+# For the first few years, the award went to the best pitcher
+# in both leagues.
+
+cyvotes &lt;- ddply(subset(AwardsSharePlayers, awardID == &quot;Cy Young&quot;),
+                 .(yearID, lgID), arrange, desc(pointsWon))
+
+# 2012 votes
+subset(cyvotes, yearID == 2012)
+</code></pre>
+
+<pre><code>##      awardID yearID lgID  playerID pointsWon pointsMax votesFirst
+## 682 Cy Young   2012   AL priceda01       153       196         14
+## 683 Cy Young   2012   AL verlaju01       149       196         13
+## 684 Cy Young   2012   AL weaveje02        70       196          0
+## 685 Cy Young   2012   AL hernafe02        41       196          0
+## 686 Cy Young   2012   AL rodnefe01        38       196          1
+## 687 Cy Young   2012   AL  salech01        17       196          0
+## 688 Cy Young   2012   AL johnsji04         5       196          0
+## 689 Cy Young   2012   AL harrima01         2       196          0
+## 690 Cy Young   2012   AL darviyu01         1       196          0
+## 691 Cy Young   2012   NL dickera01       209       224         27
+## 692 Cy Young   2012   NL kershcl01        96       224          2
+## 693 Cy Young   2012   NL gonzagi01        93       224          1
+## 694 Cy Young   2012   NL cuetojo01        75       224          1
+## 695 Cy Young   2012   NL kimbrcr01        41       224          1
+## 696 Cy Young   2012   NL  cainma01        22       224          0
+## 697 Cy Young   2012   NL lohseky01         6       224          0
+## 698 Cy Young   2012   NL chapmar01         1       224          0
+## 699 Cy Young   2012   NL hamelco01         1       224          0
+</code></pre>
+
+<pre><code class="r">
+# top three votegetters each year by league
+
+cya_top3 &lt;- ddply(cyvotes, .(yearID, lgID), function(d) head(d, 3))
+
+# unanimous Cy Young winners
+subset(cyvotes, pointsWon == pointsMax)
+</code></pre>
+
+<pre><code>##      awardID yearID lgID  playerID pointsWon pointsMax votesFirst
+## 25  Cy Young   1963   ML koufasa01        20        20         20
+## 29  Cy Young   1965   ML koufasa01        20        20         20
+## 30  Cy Young   1966   ML koufasa01        20        20         20
+## 36  Cy Young   1968   AL mclaide01        20        20         20
+## 37  Cy Young   1968   NL gibsobo01        20        20         20
+## 84  Cy Young   1972   NL carltst01       120       120         24
+## 175 Cy Young   1978   AL guidrro01       140       140         28
+## 282 Cy Young   1984   NL sutclri01       120       120         24
+## 298 Cy Young   1985   NL goodedw01       120       120         24
+## 305 Cy Young   1986   AL clemero02       140       140         28
+## 342 Cy Young   1988   NL hershor01       120       120         24
+## 427 Cy Young   1994   NL maddugr01       140       140         28
+## 441 Cy Young   1995   NL maddugr01       140       140         28
+## 476 Cy Young   1998   AL clemero02       140       140         28
+## 487 Cy Young   1999   AL martipe02       140       140         28
+## 505 Cy Young   2000   AL martipe02       140       140         28
+## 533 Cy Young   2002   NL johnsra05       160       160         32
+## 551 Cy Young   2004   AL santajo01       140       140         28
+## 579 Cy Young   2006   AL santajo01       140       140         28
+## 602 Cy Young   2007   NL peavyja01       160       160         32
+## 646 Cy Young   2010   NL hallaro01       224       224         32
+## 659 Cy Young   2011   AL verlaju01       196       196         28
+</code></pre>
+
+<pre><code class="r">
+# Top five pitchers with most top 3 vote tallies in CYA
+head(with(cya_top3, rev(sort(table(playerID)))), 5)
+</code></pre>
+
+<pre><code>## playerID
+## clemero02 johnsra05 maddugr01 palmeji01 martipe02 
+##        10         9         7         6         6
+</code></pre>
+
+<pre><code class="r">
+# Ditto for MVP awards
+
+MVP &lt;- subset(AwardsSharePlayers, awardID == &quot;MVP&quot;)
+MVP_top3 &lt;- ddply(MVP, .(yearID, lgID), 
+                  function(d) head(arrange(d, desc(pointsWon)), 3))
+head(with(MVP_top3, rev(sort(table(playerID)))), 5)
+</code></pre>
+
+<pre><code>## playerID
+## bondsba01 pujolal01 willite01 musiast01 mantlmi01 
+##         9         8         7         7         7
+</code></pre>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>Lahman</em> version 2.0-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

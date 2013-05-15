@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Lahman Datasets</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="highlight.css">
+<script src="highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for LahmanData {Lahman}"><tr><td>LahmanData {Lahman}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+Lahman Datasets
+</h2>
+
+<h3>Description</h3>
+
+
+<p>This dataset gives a consise description of the data files in the Lahman package.
+It may be useful for computing on the various files.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(LahmanData)</pre>
+
+
+<h3>Format</h3>
+
+
+<p>A data frame with 24 observations on the following 5 variables.
+</p>
+
+<dl>
+<dt><code>file</code></dt><dd><p>name of dataset</p>
+</dd>
+<dt><code>class</code></dt><dd><p>class of dataset</p>
+</dd>
+<dt><code>nobs</code></dt><dd><p>number of observations</p>
+</dd>
+<dt><code>nvar</code></dt><dd><p>number of variables</p>
+</dd>
+<dt><code>title</code></dt><dd><p>dataset title</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+
+<p>This dataset is generated using <code>vcdExtra::datasets(package="Lahman")</code>
+with some post-processing.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+data(LahmanData)
+
+# find ID variables in the datasets
+IDvars &lt;- lapply(LahmanData[,&quot;file&quot;], function(x) grep(&#39;.*ID$&#39;, colnames(get(x)), value=TRUE))
+names(IDvars) &lt;- LahmanData[,&quot;file&quot;]
+str(IDvars)
+</code></pre>
+
+<pre><code>## List of 24
+##  $ AllstarFull        : chr [1:5] &quot;playerID&quot; &quot;yearID&quot; &quot;gameID&quot; &quot;teamID&quot; ...
+##  $ Appearances        : chr [1:4] &quot;yearID&quot; &quot;teamID&quot; &quot;lgID&quot; &quot;playerID&quot;
+##  $ AwardsManagers     : chr [1:4] &quot;managerID&quot; &quot;awardID&quot; &quot;yearID&quot; &quot;lgID&quot;
+##  $ AwardsPlayers      : chr [1:4] &quot;playerID&quot; &quot;awardID&quot; &quot;yearID&quot; &quot;lgID&quot;
+##  $ AwardsShareManagers: chr [1:4] &quot;awardID&quot; &quot;yearID&quot; &quot;lgID&quot; &quot;managerID&quot;
+##  $ AwardsSharePlayers : chr [1:4] &quot;awardID&quot; &quot;yearID&quot; &quot;lgID&quot; &quot;playerID&quot;
+##  $ Batting            : chr [1:4] &quot;playerID&quot; &quot;yearID&quot; &quot;teamID&quot; &quot;lgID&quot;
+##  $ BattingPost        : chr [1:4] &quot;yearID&quot; &quot;playerID&quot; &quot;teamID&quot; &quot;lgID&quot;
+##  $ Fielding           : chr [1:4] &quot;playerID&quot; &quot;yearID&quot; &quot;teamID&quot; &quot;lgID&quot;
+##  $ FieldingOF         : chr [1:2] &quot;playerID&quot; &quot;yearID&quot;
+##  $ FieldingPost       : chr [1:4] &quot;playerID&quot; &quot;yearID&quot; &quot;teamID&quot; &quot;lgID&quot;
+##  $ HallOfFame         : chr [1:2] &quot;hofID&quot; &quot;yearID&quot;
+##  $ Managers           : chr [1:4] &quot;managerID&quot; &quot;yearID&quot; &quot;teamID&quot; &quot;lgID&quot;
+##  $ ManagersHalf       : chr [1:4] &quot;managerID&quot; &quot;yearID&quot; &quot;teamID&quot; &quot;lgID&quot;
+##  $ Master             : chr [1:9] &quot;lahmanID&quot; &quot;playerID&quot; &quot;managerID&quot; &quot;hofID&quot; ...
+##  $ Pitching           : chr [1:4] &quot;playerID&quot; &quot;yearID&quot; &quot;teamID&quot; &quot;lgID&quot;
+##  $ PitchingPost       : chr [1:4] &quot;playerID&quot; &quot;yearID&quot; &quot;teamID&quot; &quot;lgID&quot;
+##  $ Salaries           : chr [1:4] &quot;yearID&quot; &quot;teamID&quot; &quot;lgID&quot; &quot;playerID&quot;
+##  $ Schools            : chr &quot;schoolID&quot;
+##  $ SchoolsPlayers     : chr [1:2] &quot;playerID&quot; &quot;schoolID&quot;
+##  $ SeriesPost         : chr &quot;yearID&quot;
+##  $ Teams              : chr [1:5] &quot;yearID&quot; &quot;lgID&quot; &quot;teamID&quot; &quot;franchID&quot; ...
+##  $ TeamsFranchises    : chr &quot;franchID&quot;
+##  $ TeamsHalf          : chr [1:4] &quot;yearID&quot; &quot;lgID&quot; &quot;teamID&quot; &quot;divID&quot;
+</code></pre>
+
+<pre><code class="r"># vector of unique ID variables
+unique(unlist(IDvars))
+</code></pre>
+
+<pre><code>##  [1] &quot;playerID&quot;   &quot;yearID&quot;     &quot;gameID&quot;     &quot;teamID&quot;     &quot;lgID&quot;      
+##  [6] &quot;managerID&quot;  &quot;awardID&quot;    &quot;hofID&quot;      &quot;lahmanID&quot;   &quot;lahman40ID&quot;
+## [11] &quot;lahman45ID&quot; &quot;retroID&quot;    &quot;holtzID&quot;    &quot;bbrefID&quot;    &quot;schoolID&quot;  
+## [16] &quot;franchID&quot;   &quot;divID&quot;
+</code></pre>
+
+<pre><code class="r">
+# which datasets have playerID?
+names(which(sapply(IDvars, function(x) &quot;playerID&quot; %in% x)))
+</code></pre>
+
+<pre><code>##  [1] &quot;AllstarFull&quot;        &quot;Appearances&quot;        &quot;AwardsPlayers&quot;     
+##  [4] &quot;AwardsSharePlayers&quot; &quot;Batting&quot;            &quot;BattingPost&quot;       
+##  [7] &quot;Fielding&quot;           &quot;FieldingOF&quot;         &quot;FieldingPost&quot;      
+## [10] &quot;Master&quot;             &quot;Pitching&quot;           &quot;PitchingPost&quot;      
+## [13] &quot;Salaries&quot;           &quot;SchoolsPlayers&quot;
+</code></pre>
+
+<pre><code class="r">
+################################################
+# Visualize relations among datasets via an MDS
+################################################
+# jaccard distance between two sets; assure positivity
+jaccard &lt;- function(A, B) {
+    max(1 - length(intersect(A,B)) / length(union(A,B)), .00001)
+}   
+
+distmat &lt;- function(vars, FUN=jaccard) {
+    nv &lt;- length(vars)
+    d &lt;- matrix(0, nv, nv, dimnames=list(names(vars), names(vars)))
+    for(i in 1:nv) {
+        for (j in 1:nv) {
+            if (i != j) d[i,j] &lt;- FUN(vars[[i]], vars[[j]])
+        }
+    }
+    d
+}
+
+# do an MDS on distances
+distID &lt;- distmat(IDvars)
+config &lt;- cmdscale(distID)
+
+pos=rep(1:4, length=nrow(config))
+plot(config[,1], config[,2], xlab = &quot;&quot;, ylab = &quot;&quot;, asp = 1, axes=FALSE,
+    main=&quot;MDS of ID variable distances of Lahman tables&quot;)
+abline(h=0, v=0, col=&quot;gray80&quot;)
+text(config[,1], config[,2], rownames(config), cex = 0.75, pos=pos, xpd=NA)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>Lahman</em> version 2.0-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

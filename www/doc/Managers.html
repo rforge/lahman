@@ -1,0 +1,445 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Managers table</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="highlight.css">
+<script src="highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for Managers {Lahman}"><tr><td>Managers {Lahman}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+Managers table
+</h2>
+
+<h3>Description</h3>
+
+
+<p>Managers table: information about individual team managers, teams they managed and some basic statistics
+for those teams in each year.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(Managers)</pre>
+
+
+<h3>Format</h3>
+
+
+<p>A data frame with 3306 observations on the following 10 variables.
+</p>
+
+<dl>
+<dt><code>managerID</code></dt><dd><p>Player ID Number</p>
+</dd>
+<dt><code>yearID</code></dt><dd><p>Year</p>
+</dd>
+<dt><code>teamID</code></dt><dd><p>Team; a factor</p>
+</dd>
+<dt><code>lgID</code></dt><dd><p>League; a factor with levels <code>AA</code> <code>AL</code> <code>FL</code> <code>NL</code> <code>PL</code> <code>UA</code></p>
+</dd>
+<dt><code>inseason</code></dt><dd><p>Managerial order.  Zero if the individual managed the team
+the entire year.  Otherwise denotes where the manager appeared
+in the managerial order (1 for first manager, 2 for second, etc.)</p>
+</dd>
+<dt><code>G</code></dt><dd><p>Games managed</p>
+</dd>
+<dt><code>W</code></dt><dd><p>Wins</p>
+</dd>
+<dt><code>L</code></dt><dd><p>Losses</p>
+</dd>
+<dt><code>rank</code></dt><dd><p>Team's final position in standings that year</p>
+</dd>
+<dt><code>plyrMgr</code></dt><dd><p>Player Manager (denoted by 'Y'); a factor with levels <code>N</code> <code>Y</code></p>
+</dd>
+</dl>
+
+
+
+<h3>Source</h3>
+
+
+<p>Lahman, S. (2010) Lahman's Baseball Database, 1871-2012, 2012 version, <a href="http://baseball1.com/statistics/">http://baseball1.com/statistics/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+####################################
+# Basic career summaries by manager
+####################################
+
+library(&#39;plyr&#39;)
+mgrsumm &lt;- function(d) {
+    df &lt;- data.frame(with(d,
+              nyear = length(unique(yearID)),
+              yearBegin = min(yearID),
+              yearEnd = max(yearID),
+              nTeams = length(unique(teamID)),
+              nfirst = sum(rank == 1L),
+              W = sum(W),
+              L = sum(L),
+              WinPct = round(W/(W + L), 3)))
+    df
+}
+
+mgrTotals &lt;- ddply(Managers, .(managerID), summarise,
+                  nyear = length(unique(yearID)),
+                  yearBegin = min(yearID),
+                  yearEnd = max(yearID),
+                  nTeams = length(unique(teamID)),
+                  nfirst = sum(rank == 1L),
+                  games = sum(W + L),
+                  W = sum(W),
+                  L = sum(L),
+                  WinPct = round(sum(W)/sum(W + L), 3))
+mgrTotals &lt;- merge(mgrTotals,
+                   subset(Master, !is.na(managerID),
+                          select = c(&#39;managerID&#39;, &#39;nameLast&#39;, &#39;nameFirst&#39;)),
+                   by = &#39;managerID&#39;)
+
+##########################
+# Some basic queries
+##########################
+
+# Top 20 managers in terms of years of service:
+head(arrange(mgrTotals, -nyear), 20)
+</code></pre>
+
+<pre><code>##     managerID nyear yearBegin yearEnd nTeams nfirst games    W    L WinPct
+## 1   mackco01m    53      1894    1950      2      9  7679 3731 3948  0.486
+## 2  larusto01m    33      1979    2011      3     12  5093 2728 2365  0.536
+## 3  mcgrajo01m    33      1899    1932      3     11  4711 2763 1948  0.586
+## 4    coxbo01m    29      1978    2010      2     15  4505 2504 2001  0.556
+## 5  harribu01m    29      1924    1956      5      3  4377 2158 2219  0.493
+## 6  torrejo01m    29      1977    2010      5     13  4323 2326 1997  0.538
+## 7  andersp01m    26      1970    1995      2      7  4028 2194 1834  0.545
+## 8  mauchge01m    26      1960    1987      4      2  3939 1902 2037  0.483
+## 9  mckecbi01m    25      1915    1946      5      4  3619 1896 1723  0.524
+## 10 stengca01m    25      1934    1965      4     10  3747 1905 1842  0.508
+## 11 durocle01m    24      1939    1973      4      3  3717 2008 1709  0.540
+## 12 mccarjo99m    24      1926    1950      3      9  3458 2125 1333  0.615
+## 13 alstowa01m    23      1954    1976      2      7  3653 2040 1613  0.558
+## 14 pinielo01m    23      1986    2010      5      6  3548 1835 1713  0.517
+## 15 wrighha01m    23      1871    1893      4      6  2110 1225  885  0.581
+## 16 ansonca01m    21      1875    1898      3      5  2243 1296  947  0.578
+## 17 dykesji01m    21      1934    1961      6      0  2947 1406 1541  0.477
+## 18 lasorto01m    21      1976    1996      1      8  3038 1599 1439  0.526
+## 19 leylaji99m    21      1986    2012      4      5  3335 1676 1659  0.503
+## 20 willidi02m    21      1967    1988      6      6  3022 1571 1451  0.520
+##     nameLast nameFirst
+## 1       Mack    Connie
+## 2    LaRussa      Tony
+## 3     McGraw      John
+## 4        Cox     Bobby
+## 5     Harris     Bucky
+## 6      Torre       Joe
+## 7   Anderson    Sparky
+## 8      Mauch      Gene
+## 9  McKechnie      Bill
+## 10   Stengel     Casey
+## 11  Durocher       Leo
+## 12  McCarthy       Joe
+## 13    Alston    Walter
+## 14  Piniella       Lou
+## 15    Wright     Harry
+## 16     Anson       Cap
+## 17     Dykes    Jimmie
+## 18   Lasorda     Tommy
+## 19   Leyland       Jim
+## 20  Williams      Dick
+</code></pre>
+
+<pre><code class="r">
+# Top 20 winningest managers (500 games minimum)
+head(arrange(subset(mgrTotals, games &gt;= 500), -WinPct), 20)
+</code></pre>
+
+<pre><code>##     managerID nyear yearBegin yearEnd nTeams nfirst games    W    L WinPct
+## 1  mccarjo99m    24      1926    1950      3      9  3458 2125 1333  0.615
+## 2  mutriji99m     9      1883    1891      2      3  1077  658  419  0.611
+## 3  comisch01m    12      1883    1894      3      4  1381  840  541  0.608
+## 4  seleefr99m    16      1890    1905      2      5  2146 1284  862  0.598
+## 5  southbi01m    13      1929    1951      2      4  1748 1044  704  0.597
+## 6  chancfr01m    11      1905    1923      3      4  1594  946  648  0.593
+## 7  mcgrajo01m    33      1899    1932      3     11  4711 2763 1948  0.586
+## 8  lopezal01m    17      1951    1969      2      2  2414 1410 1004  0.584
+## 9  weaveea99m    17      1968    1986      1      6  2540 1480 1060  0.583
+## 10 cochrmi01m     5      1934    1938      1      2   598  348  250  0.582
+## 11 wrighha01m    23      1871    1893      4      6  2110 1225  885  0.581
+## 12 ansonca01m    21      1875    1898      3      5  2243 1296  947  0.578
+## 13  dyered01m     5      1946    1950      1      1   771  446  325  0.578
+## 14 rowlapa99m     4      1915    1918      1      1   586  339  247  0.578
+## 15 clarkfr01m    19      1897    1915      2      4  2783 1602 1181  0.576
+## 16 girarjo01m     6      2006    2012      2      3   972  557  415  0.573
+## 17 mcgunbi01m     5      1888    1896      4      2   575  327  248  0.569
+## 18 johnsda02m    16      1984    2012      5      6  2281 1286  995  0.564
+## 19  wardjo01m     7      1880    1894      4      0   732  412  320  0.563
+## 20 moranpa01m     9      1915    1923      2      2  1334  748  586  0.561
+##      nameLast nameFirst
+## 1    McCarthy       Joe
+## 2      Mutrie       Jim
+## 3    Comiskey   Charlie
+## 4       Selee     Frank
+## 5  Southworth     Billy
+## 6      Chance     Frank
+## 7      McGraw      John
+## 8       Lopez        Al
+## 9      Weaver      Earl
+## 10   Cochrane    Mickey
+## 11     Wright     Harry
+## 12      Anson       Cap
+## 13       Dyer     Eddie
+## 14    Rowland     Pants
+## 15     Clarke      Fred
+## 16    Girardi       Joe
+## 17 McGunnigle      Bill
+## 18    Johnson     Davey
+## 19       Ward      John
+## 20      Moran       Pat
+</code></pre>
+
+<pre><code class="r">
+# Hmm. Most of these are 19th century managers.
+# How about the modern era?
+head(arrange(subset(mgrTotals, yearBegin &gt;= 1900 &amp; games &gt;= 500), -WinPct), 20)
+</code></pre>
+
+<pre><code>##     managerID nyear yearBegin yearEnd nTeams nfirst games    W    L WinPct
+## 1  mccarjo99m    24      1926    1950      3      9  3458 2125 1333  0.615
+## 2  southbi01m    13      1929    1951      2      4  1748 1044  704  0.597
+## 3  chancfr01m    11      1905    1923      3      4  1594  946  648  0.593
+## 4  lopezal01m    17      1951    1969      2      2  2414 1410 1004  0.584
+## 5  weaveea99m    17      1968    1986      1      6  2540 1480 1060  0.583
+## 6  cochrmi01m     5      1934    1938      1      2   598  348  250  0.582
+## 7   dyered01m     5      1946    1950      1      1   771  446  325  0.578
+## 8  rowlapa99m     4      1915    1918      1      1   586  339  247  0.578
+## 9  girarjo01m     6      2006    2012      2      3   972  557  415  0.573
+## 10 johnsda02m    16      1984    2012      5      6  2281 1286  995  0.564
+## 11 moranpa01m     9      1915    1923      2      2  1334  748  586  0.561
+## 12 oneilst01m    14      1935    1954      4      1  1861 1040  821  0.559
+## 13 alstowa01m    23      1954    1976      2      7  3653 2040 1613  0.558
+## 14   coxbo01m    29      1978    2010      2     15  4505 2504 2001  0.556
+## 15 dierkla01m     5      1997    2001      1      5   783  435  348  0.556
+## 16 huggimi01m    17      1913    1929      2      6  2547 1413 1134  0.555
+## 17 manuech01m    11      2000    2012      2      6  1706  947  759  0.555
+## 18 terrybi01m    10      1932    1941      1      3  1484  823  661  0.555
+## 19 martibi02m    16      1969    1988      5      6  2266 1253 1013  0.553
+## 20 littlgr99m     4      2002    2007      2      0   648  358  290  0.552
+##      nameLast nameFirst
+## 1    McCarthy       Joe
+## 2  Southworth     Billy
+## 3      Chance     Frank
+## 4       Lopez        Al
+## 5      Weaver      Earl
+## 6    Cochrane    Mickey
+## 7        Dyer     Eddie
+## 8     Rowland     Pants
+## 9     Girardi       Joe
+## 10    Johnson     Davey
+## 11      Moran       Pat
+## 12    O&#39;Neill     Steve
+## 13     Alston    Walter
+## 14        Cox     Bobby
+## 15    Dierker     Larry
+## 16    Huggins    Miller
+## 17     Manuel   Charlie
+## 18      Terry      Bill
+## 19     Martin     Billy
+## 20     Little     Grady
+</code></pre>
+
+<pre><code class="r">
+# Top 10 managers in terms of percentage of titles (league or divisional) -
+# should bias toward managers post-1970 since more first place finishes
+# are available
+head(arrange(subset(mgrTotals, yearBegin &gt;= 1900 &amp; games &gt;= 500),
+                -round(nfirst/nyear, 3)), 10)
+</code></pre>
+
+<pre><code>##     managerID nyear yearBegin yearEnd nTeams nfirst games    W    L WinPct
+## 1  dierkla01m     5      1997    2001      1      5   783  435  348  0.556
+## 2  howsedi01m     8      1978    1986      2      5   932  507  425  0.544
+## 3   freyji99m     5      1980    1986      2      3   610  323  287  0.530
+## 4  gardero01m    11      2002    2012      1      6  1783  932  851  0.523
+## 5  manuech01m    11      2000    2012      2      6  1706  947  759  0.555
+## 6    coxbo01m    29      1978    2010      2     15  4505 2504 2001  0.556
+## 7  brenlbo01m     4      2001    2004      1      2   565  303  262  0.536
+## 8  girarjo01m     6      2006    2012      2      3   972  557  415  0.573
+## 9  kenneke99m     4      1993    1996      2      2   582  309  273  0.531
+## 10 morgajo01m     4      1988    1991      1      2   563  301  262  0.535
+##      nameLast nameFirst
+## 1     Dierker     Larry
+## 2      Howser      Dick
+## 3        Frey       Jim
+## 4  Gardenhire       Ron
+## 5      Manuel   Charlie
+## 6         Cox     Bobby
+## 7      Brenly       Bob
+## 8     Girardi       Joe
+## 9     Kennedy     Kevin
+## 10     Morgan       Joe
+</code></pre>
+
+<pre><code class="r">
+# How about pre-1969?
+head(arrange(subset(mgrTotals,
+                    yearBegin &gt;= 1900 &amp; yearEnd &lt;= 1969 &amp; games &gt;= 500),
+                    -round(nfirst/nyear, 3)), 10)
+</code></pre>
+
+<pre><code>##     managerID nyear yearBegin yearEnd nTeams nfirst games    W    L WinPct
+## 1  cochrmi01m     5      1934    1938      1      2   598  348  250  0.582
+## 2  stengca01m    25      1934    1965      4     10  3747 1905 1842  0.508
+## 3  mccarjo99m    24      1926    1950      3      9  3458 2125 1333  0.615
+## 4  chancfr01m    11      1905    1923      3      4  1594  946  648  0.593
+## 5  huggimi01m    17      1913    1929      2      6  2547 1413 1134  0.555
+## 6  colliji01m     6      1901    1906      1      2   831  455  376  0.548
+## 7  streega01m     6      1929    1938      2      2   697  365  332  0.524
+## 8  southbi01m    13      1929    1951      2      4  1748 1044  704  0.597
+## 9  terrybi01m    10      1932    1941      1      3  1484  823  661  0.555
+## 10 carribi02m     7      1913    1929      1      2   989  489  500  0.494
+##      nameLast nameFirst
+## 1    Cochrane    Mickey
+## 2     Stengel     Casey
+## 3    McCarthy       Joe
+## 4      Chance     Frank
+## 5     Huggins    Miller
+## 6     Collins     Jimmy
+## 7      Street     Gabby
+## 8  Southworth     Billy
+## 9       Terry      Bill
+## 10   Carrigan      Bill
+</code></pre>
+
+<pre><code class="r">
+##############################################
+# Density plot of the number of games managed:
+##############################################
+
+library(&#39;ggplot2&#39;)
+ggplot(mgrTotals, aes(x = games)) + geom_density(fill = &#39;red&#39;, alpha = 0.3) +
+    labs(x = &#39;Number of games managed&#39;)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">
+# Who managed more than 4000 games?
+subset(mgrTotals, games &gt;= 4000)
+</code></pre>
+
+<pre><code>##      managerID nyear yearBegin yearEnd nTeams nfirst games    W    L
+## 12  andersp01m    26      1970    1995      2      7  4028 2194 1834
+## 112   coxbo01m    29      1978    2010      2     15  4505 2504 2001
+## 242 harribu01m    29      1924    1956      5      3  4377 2158 2219
+## 334 larusto01m    33      1979    2011      3     12  5093 2728 2365
+## 362  mackco01m    53      1894    1950      2      9  7679 3731 3948
+## 398 mcgrajo01m    33      1899    1932      3     11  4711 2763 1948
+## 611 torrejo01m    29      1977    2010      5     13  4323 2326 1997
+##     WinPct nameLast nameFirst
+## 12   0.545 Anderson    Sparky
+## 112  0.556      Cox     Bobby
+## 242  0.493   Harris     Bucky
+## 334  0.536  LaRussa      Tony
+## 362  0.486     Mack    Connie
+## 398  0.586   McGraw      John
+## 611  0.538    Torre       Joe
+</code></pre>
+
+<pre><code class="r"># Connie Mack had an advantage: he owned the Philadelphia A&#39;s :)
+
+# Table of Tony LaRussa&#39;s team finishes:
+with(subset(Managers, managerID == &#39;larusto01m&#39;), table(rank))
+</code></pre>
+
+<pre><code>## rank
+##  1  2  3  4  5  7 
+## 12  4  8  5  4  1
+</code></pre>
+
+<pre><code class="r">
+# To include zero frequencies, one alternative is the tabulate() function:
+with(subset(Managers, managerID == &#39;larusto01m&#39;), tabulate(rank, 7))
+</code></pre>
+
+<pre><code>## [1] 12  4  8  5  4  0  1
+</code></pre>
+
+<pre><code class="r">
+
+##############################################
+# Scatterplot of winning percentage vs. number of games managed (min 100)
+##############################################
+
+ggplot(subset(mgrTotals, yearBegin &gt;= 1900 &amp; games &gt;= 100),
+       aes(x = games, y = WinPct)) + geom_point() + geom_smooth() +
+    labs(x = &#39;Number of games managed&#39;)
+</code></pre>
+
+<pre><code>## geom_smooth: method=&quot;auto&quot; and size of largest group is &lt;1000, so using
+## loess. Use &#39;method = x&#39; to change the smoothing method.
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">
+############################################
+# Division titles
+############################################
+
+# Plot of number of first place finishes by managers with at least 8 years
+# of experience in the divisional era (&gt;= 1969):
+
+divMgr &lt;- subset(mgrTotals, yearBegin &gt;= 1969 &amp; nyear &gt;= 8)
+
+# Response is the number of titles
+ggplot(divMgr, aes(x = nyear, y = nfirst)) +
+    geom_point(position = position_jitter(w = 0.2)) +
+    labs(x = &#39;Number of years&#39;, y = &#39;Number of divisional titles&#39;) +
+    geom_smooth()
+</code></pre>
+
+<pre><code>## geom_smooth: method=&quot;auto&quot; and size of largest group is &lt;1000, so using
+## loess. Use &#39;method = x&#39; to change the smoothing method.
+</code></pre>
+
+<pre><code>## Warning: Removed 1 rows containing missing values (stat_smooth).
+</code></pre>
+
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">
+# Response is the proportion of titles
+ggplot(divMgr, aes(x = nyear, y = round(nfirst/nyear, 3))) +
+    geom_point(position = position_jitter(w = 0.2)) +
+    labs(x = &#39;Number of years&#39;, y = &#39;Proportion of divisional titles&#39;) +
+    geom_smooth()
+</code></pre>
+
+<pre><code>## geom_smooth: method=&quot;auto&quot; and size of largest group is &lt;1000, so using
+## loess. Use &#39;method = x&#39; to change the smoothing method.
+</code></pre>
+
+<pre><code>## Warning: Removed 1 rows containing missing values (stat_smooth).
+</code></pre>
+
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>Lahman</em> version 2.0-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

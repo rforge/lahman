@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: SchoolsPlayers table</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="highlight.css">
+<script src="highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for SchoolsPlayers {Lahman}"><tr><td>SchoolsPlayers {Lahman}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+SchoolsPlayers table
+</h2>
+
+<h3>Description</h3>
+
+
+<p>Information on schools players attended, by player
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(SchoolsPlayers)</pre>
+
+
+<h3>Format</h3>
+
+
+<p>A data frame with 6147 observations on the following 4 variables.
+</p>
+
+<dl>
+<dt><code>playerID</code></dt><dd><p>Player ID code</p>
+</dd>
+<dt><code>schoolID</code></dt><dd><p>school ID code</p>
+</dd>
+<dt><code>yearMin</code></dt><dd><p>year player's college career started</p>
+</dd>
+<dt><code>yearMax</code></dt><dd><p>year player's college career ended</p>
+</dd>
+</dl>
+
+
+
+<h3>Source</h3>
+
+
+<p>Lahman, S. (2010) Lahman's Baseball Database, 1871-2012, 2012 version, <a href="http://baseball1.com/statistics/">http://baseball1.com/statistics/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+data(SchoolsPlayers)
+head(SchoolsPlayers)
+</code></pre>
+
+<pre><code>##    playerID  schoolID yearMin yearMax
+## 1 aardsda01    pennst    2001    2001
+## 2 aardsda01      rice    2002    2003
+## 3 abbeybe01   vermont    1888    1892
+## 4 abbotgl01 carkansas    1970    1970
+## 5 abbotje01  kentucky    1991    1992
+## 6 abbotji01  michigan    1986    1988
+</code></pre>
+
+<pre><code class="r">
+## Q: What are the top universities for producing MLB players?
+SPcount &lt;- table(SchoolsPlayers$schoolID)
+SPcount[SPcount&gt;50]
+</code></pre>
+
+<pre><code>## 
+##    alabama    arizona  arizonast california    florida  floridast 
+##         62         66         98         53         54         60 
+##    fordham  holycross   illinois        lsu   michigan  notredame 
+##         56         75         68         59         77         70 
+##   oklahoma santaclara   stanford  stmarysca      texas       ucla 
+##         61         54         82         60        100         66 
+##      upenn        usc 
+##         53        102
+</code></pre>
+
+<pre><code class="r">
+library(&#39;lattice&#39;)
+dotplot(SPcount[SPcount&gt;50])
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">dotplot(sort(SPcount[SPcount&gt;50]))
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">
+## Q: How many schools are represented in this dataset?
+length(table(SchoolsPlayers$schoolID))
+</code></pre>
+
+<pre><code>## [1] 713
+</code></pre>
+
+<pre><code class="r">
+# Histogram of the number of players from each school who played in MLB:
+with(SchoolsPlayers, hist(table(schoolID), xlab = &#39;Number of players&#39;,
+                           main = &quot;&quot;))
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>Lahman</em> version 2.0-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Batting table</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="highlight.css">
+<script src="highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for Batting {Lahman}"><tr><td>Batting {Lahman}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+Batting table
+</h2>
+
+<h3>Description</h3>
+
+
+<p>Batting table - batting statistics
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(Batting)</pre>
+
+
+<h3>Format</h3>
+
+
+<p>A data frame with 96600 observations on the following 24 variables.
+</p>
+
+<dl>
+<dt><code>playerID</code></dt><dd><p>Player ID code</p>
+</dd>
+<dt><code>yearID</code></dt><dd><p>Year</p>
+</dd>
+<dt><code>stint</code></dt><dd><p>player's stint (order of appearances within a season)</p>
+</dd>
+<dt><code>teamID</code></dt><dd><p>Team; a factor</p>
+</dd>
+<dt><code>lgID</code></dt><dd><p>League; a factor with levels <code>AA</code> <code>AL</code> <code>FL</code> <code>NL</code> <code>PL</code> <code>UA</code></p>
+</dd>
+<dt><code>G</code></dt><dd><p>Games: number of games in which a player played</p>
+</dd>
+<dt><code>G_batting</code></dt><dd><p>Game as batter</p>
+</dd>
+<dt><code>AB</code></dt><dd><p>At Bats</p>
+</dd>
+<dt><code>R</code></dt><dd><p>Runs</p>
+</dd>
+<dt><code>H</code></dt><dd><p>Hits: times reached base because of a batted, fair ball without error by the defense</p>
+</dd>
+<dt><code>X2B</code></dt><dd><p>Doubles: hits on which the batter reached second base safely</p>
+</dd>
+<dt><code>X3B</code></dt><dd><p>Triples: hits on which the batter reached third base safely</p>
+</dd>
+<dt><code>HR</code></dt><dd><p>Homeruns</p>
+</dd>
+<dt><code>RBI</code></dt><dd><p>Runs Batted In</p>
+</dd>
+<dt><code>SB</code></dt><dd><p>Stolen Bases</p>
+</dd>
+<dt><code>CS</code></dt><dd><p>Caught Stealing</p>
+</dd>
+<dt><code>BB</code></dt><dd><p>Base on Balls</p>
+</dd>
+<dt><code>SO</code></dt><dd><p>Strikeouts</p>
+</dd>
+<dt><code>IBB</code></dt><dd><p>Intentional walks</p>
+</dd>
+<dt><code>HBP</code></dt><dd><p>Hit by pitch</p>
+</dd>
+<dt><code>SH</code></dt><dd><p>Sacrifice hits</p>
+</dd>
+<dt><code>SF</code></dt><dd><p>Sacrifice flies</p>
+</dd>
+<dt><code>GIDP</code></dt><dd><p>Grounded into double plays</p>
+</dd>
+<dt><code>G_old</code></dt><dd><p>Old version of games (deprecated)</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+
+<p>Variables <code>X2B</code> and <code>X3B</code> are named <code>2B</code> and <code>3B</code> in the original database
+</p>
+
+
+<h3>Source</h3>
+
+
+<p>Lahman, S. (2010) Lahman's Baseball Database, 1871-2012, 2012 version, <a href="http://baseball1.com/statistics/">http://baseball1.com/statistics/</a>
+</p>
+
+
+<h3>See Also</h3>
+
+
+<p><code><a href="battingStats.html">battingStats</a></code> for calculating batting average (BA) and other derived statistics
+</p>
+<p><code><a href="../../plyr/html/baseball.html">baseball</a></code> for a similar dataset, but a subset of players who played 15 or more seasons.
+</p>
+<p><code><a href="../../vcd/html/Baseball.html">Baseball</a></code> for data on batting in the 1987 season.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+data(Batting)
+head(Batting)
+</code></pre>
+
+<pre><code>##    playerID yearID stint teamID lgID  G G_batting AB R H X2B X3B HR RBI SB
+## 1 aardsda01   2004     1    SFN   NL 11        11  0 0 0   0   0  0   0  0
+## 2 aardsda01   2006     1    CHN   NL 45        43  2 0 0   0   0  0   0  0
+## 3 aardsda01   2007     1    CHA   AL 25         2  0 0 0   0   0  0   0  0
+## 4 aardsda01   2008     1    BOS   AL 47         5  1 0 0   0   0  0   0  0
+## 5 aardsda01   2009     1    SEA   AL 73         3  0 0 0   0   0  0   0  0
+## 6 aardsda01   2010     1    SEA   AL 53         4  0 0 0   0   0  0   0  0
+##   CS BB SO IBB HBP SH SF GIDP G_old
+## 1  0  0  0   0   0  0  0    0    11
+## 2  0  0  0   0   0  1  0    0    45
+## 3  0  0  0   0   0  0  0    0     2
+## 4  0  0  1   0   0  0  0    0     5
+## 5  0  0  0   0   0  0  0    0    NA
+## 6  0  0  0   0   0  0  0    0    NA
+</code></pre>
+
+<pre><code class="r">require(&#39;plyr&#39;)
+
+# calculate batting average and other stats
+batting &lt;- battingStats()
+
+# add salary to Batting data; need to match by player, year and team
+batting &lt;- merge(batting, 
+                 Salaries[,c(&quot;playerID&quot;, &quot;yearID&quot;, &quot;teamID&quot;, &quot;salary&quot;)], 
+                 by=c(&quot;playerID&quot;, &quot;yearID&quot;, &quot;teamID&quot;), all.x=TRUE)
+
+# Add name, age and bat hand information:
+masterInfo &lt;- Master[, c(&#39;playerID&#39;, &#39;birthYear&#39;, &#39;birthMonth&#39;,
+                          &#39;nameLast&#39;, &#39;nameFirst&#39;, &#39;bats&#39;)]
+batting &lt;- merge(batting, masterInfo, all.x = TRUE)
+batting$age &lt;- with(batting, yearID - birthYear -
+                             ifelse(birthMonth &lt; 10, 0, 1))
+
+batting &lt;- arrange(batting, playerID, yearID, stint)
+
+## Generate a ggplot similar to the NYT graph in the story about Ted
+## Williams and the last .400 MLB season 
+# http://www.nytimes.com/interactive/2011/09/18/sports/baseball/WILLIAMS-GRAPHIC.html
+
+# Restrict the pool of eligible players to the years after 1899 and
+# players with a minimum of 450 plate appearances (this covers the
+# strike year of 1994 when Tony Gwynn hit .394 before play was suspended
+# for the season - in a normal year, the minimum number of plate appearances is 502)
+eligibleHitters &lt;- subset(batting, yearID &gt;= 1900 &amp; PA &gt; 450)
+
+# Find the hitters with the highest BA in MLB each year (there are a
+# few ties).  Include all players with BA &gt; .400
+topHitters &lt;- ddply(eligibleHitters, .(yearID), subset, (BA == max(BA))|BA &gt; .400)
+
+# Create a factor variable to distinguish the .400 hitters
+topHitters$ba400 &lt;- with(topHitters, BA &gt;= 0.400)
+
+# Sub-data frame for the .400 hitters plus the outliers after 1950
+# (averages above .380) - used to produce labels in the plot below
+bignames &lt;- rbind(subset(topHitters, ba400),
+                  subset(topHitters, yearID &gt; 1950 &amp; BA &gt; 0.380))
+# Cut to the relevant set of variables
+bignames &lt;- subset(bignames, select = c(&#39;playerID&#39;, &#39;yearID&#39;, &#39;nameLast&#39;,
+                                        &#39;nameFirst&#39;, &#39;BA&#39;))
+
+# Ditto for the original data frame
+topHitters &lt;- subset(topHitters, select = c(&#39;playerID&#39;, &#39;yearID&#39;, &#39;BA&#39;, &#39;ba400&#39;))
+
+# Positional offsets to spread out certain labels
+#                     NL TC JJ TC GS TC RH GS HH RH RH BT TW TW  RC GB TG 
+bignames$xoffset &lt;- c(0, 0, 0, 0, 0, 0, 0, 0, -8, 0, 3, 3, 0, 0, -2, 0, 0)
+bignames$yoffset &lt;- c(0, 0, -0.003, 0, 0, 0, 0, 0, -0.004, 0, 0, 0, 0, 0, -0.003, 0, 0)  +  0.002
+
+require(&#39;ggplot2&#39;)                               
+</code></pre>
+
+<pre><code>## Loading required package: ggplot2
+</code></pre>
+
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 2.15.3
+</code></pre>
+
+<pre><code class="r">ggplot(topHitters, aes(x = yearID, y = BA)) +
+    geom_point(aes(colour = ba400), size = 2.5) +
+    geom_hline(yintercept = 0.400, size = 1) +
+    geom_text(data = bignames, aes(x = yearID + xoffset, y = BA + yoffset,
+                                   label = nameLast), size = 3) +
+    scale_colour_manual(values = c(&#39;FALSE&#39; = &#39;black&#39;, &#39;TRUE&#39; = &#39;red&#39;)) +
+    ylim(0.330, 0.430) +
+    xlab(&#39;Year&#39;) +
+    scale_y_continuous(&#39;Batting average&#39;,
+                       breaks = seq(0.34, 0.42, by = 0.02),
+                       labels = c(&#39;.340&#39;, &#39;.360&#39;, &#39;.380&#39;, &#39;.400&#39;, &#39;.420&#39;)) +
+    geom_smooth() +
+    theme(legend.position = &#39;none&#39;)
+</code></pre>
+
+<pre><code>## Scale for &#39;y&#39; is already present. Adding another scale for &#39;y&#39;, which will
+## replace the existing scale.
+</code></pre>
+
+<pre><code>## geom_smooth: method=&quot;auto&quot; and size of largest group is &lt;1000, so using
+## loess. Use &#39;method = x&#39; to change the smoothing method.
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>Lahman</em> version 2.0-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

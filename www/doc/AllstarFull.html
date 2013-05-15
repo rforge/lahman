@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: AllstarFull table</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="highlight.css">
+<script src="highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for AllstarFull {Lahman}"><tr><td>AllstarFull {Lahman}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+AllstarFull table
+</h2>
+
+<h3>Description</h3>
+
+
+<p>All Star appearances by players
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(AllstarFull)</pre>
+
+
+<h3>Format</h3>
+
+
+<p>A data frame with 4834 observations on the following 8 variables.
+</p>
+
+<dl>
+<dt><code>playerID</code></dt><dd><p>Player ID code</p>
+</dd>
+<dt><code>yearID</code></dt><dd><p>Year</p>
+</dd>
+<dt><code>gameNum</code></dt><dd><p>Game number (for years in which more than one game was played)</p>
+</dd>
+<dt><code>gameID</code></dt><dd><p>Game ID code</p>
+</dd>
+<dt><code>teamID</code></dt><dd><p>Team; a factor</p>
+</dd>
+<dt><code>lgID</code></dt><dd><p>League; a factor with levels <code>AL</code> <code>NL</code></p>
+</dd>
+<dt><code>GP</code></dt><dd><p>Game played (zero if player did not appear in game)</p>
+</dd>
+<dt><code>startingPos</code></dt><dd><p>If the player started, what position he played</p>
+</dd>
+</dl>
+
+
+
+<h3>Source</h3>
+
+
+<p>Lahman, S. (2010) Lahman's Baseball Database, 1871-2012, 2012 version, <a href="http://baseball1.com/statistics/">http://baseball1.com/statistics/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+data(AllstarFull)
+
+# find number of appearances by players in the All Star games
+player_appearances &lt;- with(AllstarFull, rev(sort(table(playerID))))
+
+# How many All-Star players, in total?
+length(player_appearances)
+</code></pre>
+
+<pre><code>## [1] 1637
+</code></pre>
+
+<pre><code class="r">
+# density plot of the whole distribution
+plot(density(player_appearances), main=&quot;Player appearances in All Star Games&quot;)
+rug(jitter(player_appearances))
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">
+# who has played in more than 10 ASGs?
+player_appearances[player_appearances &gt; 10]
+</code></pre>
+
+<pre><code>## playerID
+## aaronha01 musiast01  mayswi01 mantlmi01 willite01 ripkeca01 yastrca01 
+##        25        24        24        20        19        19        18 
+## robinbr01 kalinal01 carewro01 berrayo01 spahnwa01  rosepe01 smithoz01 
+##        18        18        18        18        17        17        15 
+## gwynnto01   foxne01 clemero01 rodriiv01 rodrial01 robinfr02 jacksre01 
+##        15        15        15        14        14        14        14 
+## bondsba01 benchjo01 bankser01 killeha01 jeterde01 griffke02 dimagjo01 
+##        14        14        14        13        13        13        13 
+## brettge01 aparilu01 winfida01 seaveto01 schmimi01 riverma01 ramirma02 
+##        13        13        12        12        12        12        12 
+## piazzmi01   ottme01 mcgwima01 matheed01 larkiba01 howarel01 boggswa01 
+##        12        12        12        12        12        12        12 
+## alomaro01 freehbi01  fiskca01 dickebi01 crandde01 clemero02 cepedor01 
+##        12        11        11        11        11        11        11 
+## cartega01 boyerke01 
+##        11        11
+</code></pre>
+
+<pre><code class="r">hist(player_appearances[player_appearances &gt; 10])
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">
+
+# Hank Aaron&#39;s All-Star record:
+subset(AllstarFull, playerID == &quot;aaronha01&quot;)
+</code></pre>
+
+<pre><code>##       playerID yearID gameNum       gameID teamID lgID GP startingPos
+## 1129 aaronha01   1955       0 NLS195507120    ML1   NL  1          NA
+## 1188 aaronha01   1956       0 ALS195607100    ML1   NL  1          NA
+## 1229 aaronha01   1957       0 NLS195707090    ML1   NL  1           9
+## 1279 aaronha01   1958       0 ALS195807080    ML1   NL  1           9
+## 1370 aaronha01   1959       1 NLS195907070    ML1   NL  1           9
+## 1371 aaronha01   1959       2 NLS195908030    ML1   NL  1           9
+## 1488 aaronha01   1960       1 ALS196007110    ML1   NL  1           9
+## 1489 aaronha01   1960       2 ALS196007130    ML1   NL  1           9
+## 1617 aaronha01   1961       1 NLS196107110    ML1   NL  1          NA
+## 1618 aaronha01   1961       2 ALS196107310    ML1   NL  1          NA
+## 1714 aaronha01   1962       1 ALS196207100    ML1   NL  0          NA
+## 1724 aaronha01   1962       2 NLS196207300    ML1   NL  1          NA
+## 1785 aaronha01   1963       0 ALS196307090    ML1   NL  1           9
+## 1844 aaronha01   1964       0 NLS196407070    ML1   NL  1          NA
+## 1891 aaronha01   1965       0 ALS196507130    ML1   NL  1           9
+## 1940 aaronha01   1966       0 NLS196607120    ATL   NL  1           7
+## 1995 aaronha01   1967       0 ALS196707110    ATL   NL  1           8
+## 2048 aaronha01   1968       0 NLS196807090    ATL   NL  1           9
+## 2106 aaronha01   1969       0 ALS196907230    ATL   NL  1           9
+## 2163 aaronha01   1970       0 NLS197007140    ATL   NL  1           9
+## 2224 aaronha01   1971       0 ALS197107130    ATL   NL  1           9
+## 2286 aaronha01   1972       0 NLS197207250    ATL   NL  1           9
+## 2340 aaronha01   1973       0 ALS197307240    ATL   NL  1           3
+## 2407 aaronha01   1974       0 NLS197407230    ATL   NL  1           9
+## 2443 aaronha01   1975       0 ALS197507150    ML4   AL  1          NA
+</code></pre>
+
+<pre><code class="r">
+# Years that Stan Musial played in the ASG:
+with(AllstarFull, yearID[playerID == &quot;musiast01&quot;])
+</code></pre>
+
+<pre><code>##  [1] 1943 1944 1946 1947 1948 1949 1950 1951 1952 1953 1954 1955 1956 1957
+## [15] 1958 1959 1959 1960 1960 1961 1961 1962 1962 1963
+</code></pre>
+
+<pre><code class="r">
+# Starting positions he played (NA means did not start)
+with(AllstarFull, startingPos[playerID == &quot;musiast01&quot;])
+</code></pre>
+
+<pre><code>##  [1]  7  8  7 NA  7  8  3  7  8  7  9 NA  9  3  3  3 NA NA NA NA NA NA NA
+## [24] NA
+</code></pre>
+
+<pre><code class="r">
+# All-Star rosters from the 1966 ASG
+subset(AllstarFull, gameID == &quot;NLS196607120&quot;)
+</code></pre>
+
+<pre><code>##       playerID yearID gameNum       gameID teamID lgID GP startingPos
+## 1908 mclaide01   1966       0 NLS196607120    DET   AL  1           1
+## 1909 freehbi01   1966       0 NLS196607120    DET   AL  1           2
+## 1910 scottge02   1966       0 NLS196607120    BOS   AL  1           3
+## 1911 knoopbo01   1966       0 NLS196607120    CAL   AL  1           4
+## 1912 robinbr01   1966       0 NLS196607120    BAL   AL  1           5
+## 1913 mcauldi01   1966       0 NLS196607120    DET   AL  1           6
+## 1914 robinfr02   1966       0 NLS196607120    BAL   AL  1           7
+## 1915 kalinal01   1966       0 NLS196607120    DET   AL  1           8
+## 1916 olivato01   1966       0 NLS196607120    MIN   AL  1           9
+## 1917 barbest01   1966       0 NLS196607120    BAL   AL  0          NA
+## 1918  bellga01   1966       0 NLS196607120    CLE   AL  0          NA
+## 1919 etchean01   1966       0 NLS196607120    BAL   AL  0          NA
+## 1920 hunteca01   1966       0 NLS196607120    KC1   AL  0          NA
+## 1921 mcdowsa01   1966       0 NLS196607120    CLE   AL  0          NA
+## 1922 yastrca01   1966       0 NLS196607120    BOS   AL  0          NA
+## 1923  ageeto01   1966       0 NLS196607120    CHA   AL  1          NA
+## 1924 batteea01   1966       0 NLS196607120    MIN   AL  1          NA
+## 1925  cashno01   1966       0 NLS196607120    DET   AL  1          NA
+## 1926 colavro01   1966       0 NLS196607120    CLE   AL  1          NA
+## 1927 fregoji01   1966       0 NLS196607120    CAL   AL  1          NA
+## 1928  kaatji01   1966       0 NLS196607120    MIN   AL  1          NA
+## 1929 killeha01   1966       0 NLS196607120    MIN   AL  1          NA
+## 1930 richabo01   1966       0 NLS196607120    NYA   AL  1          NA
+## 1931 richepe01   1966       0 NLS196607120    WS2   AL  1          NA
+## 1932 siebeso01   1966       0 NLS196607120    CLE   AL  1          NA
+## 1933 stottme01   1966       0 NLS196607120    NYA   AL  1          NA
+## 1934 koufasa01   1966       0 NLS196607120    LAN   NL  1           1
+## 1935 torrejo01   1966       0 NLS196607120    ATL   NL  1           2
+## 1936 mccovwi01   1966       0 NLS196607120    SFN   NL  1           3
+## 1937 lefebji01   1966       0 NLS196607120    LAN   NL  1           4
+## 1938 santoro01   1966       0 NLS196607120    CHN   NL  1           5
+## 1939 cardele01   1966       0 NLS196607120    CIN   NL  1           6
+## 1940 aaronha01   1966       0 NLS196607120    ATL   NL  1           7
+## 1941  mayswi01   1966       0 NLS196607120    SFN   NL  1           8
+## 1942 clemero01   1966       0 NLS196607120    PIT   NL  1           9
+## 1943  aloufe01   1966       0 NLS196607120    ATL   NL  0          NA
+## 1944 gibsobo01   1966       0 NLS196607120    SLN   NL  0          NA
+## 1945 halleto01   1966       0 NLS196607120    SFN   NL  0          NA
+## 1946 mccoobi01   1966       0 NLS196607120    CIN   NL  0          NA
+## 1947 morgajo02   1966       0 NLS196607120    HOU   NL  0          NA
+## 1948 raymocl01   1966       0 NLS196607120    HOU   NL  0          NA
+## 1949 reganph01   1966       0 NLS196607120    LAN   NL  0          NA
+## 1950 vealebo01   1966       0 NLS196607120    PIT   NL  0          NA
+## 1951 allendi01   1966       0 NLS196607120    PHI   NL  1          NA
+## 1952 bunniji01   1966       0 NLS196607120    PHI   NL  1          NA
+## 1953 floodcu01   1966       0 NLS196607120    SLN   NL  1          NA
+## 1954  hartji01   1966       0 NLS196607120    SFN   NL  1          NA
+## 1955  huntro01   1966       0 NLS196607120    NYN   NL  1          NA
+## 1956 maricju01   1966       0 NLS196607120    SFN   NL  1          NA
+## 1957 mccarti01   1966       0 NLS196607120    SLN   NL  1          NA
+## 1958 perryga01   1966       0 NLS196607120    SFN   NL  1          NA
+## 1959 stargwi01   1966       0 NLS196607120    PIT   NL  1          NA
+## 1960 willsma01   1966       0 NLS196607120    LAN   NL  1          NA
+</code></pre>
+
+<pre><code class="r">
+# All-Stars from the Washington Nationals
+subset(AllstarFull, teamID == &quot;WAS&quot;)
+</code></pre>
+
+<pre><code>##       playerID yearID gameNum       gameID teamID lgID GP startingPos
+## 4305 cordech01   2005       0 ALS200507120    WAS   NL  1          NA
+## 4308 hernali01   2005       0 ALS200507120    WAS   NL  1          NA
+## 4361 soriaal01   2006       0 NLS200607110    WAS   NL  1           7
+## 4455 youngdm01   2007       0 NLS200707100    WAS   NL  1          NA
+## 4505 guzmacr01   2008       0 ALS200807150    WAS   NL  1          NA
+## 4594 zimmery01   2009       0 NLS200907140    WAS   NL  1          NA
+## 4663 cappsma01   2010       0 ALS201007130    WAS   NL  1          NA
+## 4733 clippty01   2011       0 NLS201107120    WAS   NL  1          NA
+## 4814 gonzagi01   2012       0 ALS201207100    WAS   NL  1          NA
+## 4817 harpebr03   2012       0 ALS201207100    WAS   NL  1          NA
+## 4827 strasst01   2012       0 ALS201207100    WAS   NL  1          NA
+## 4829 desmoia01   2012       0 ALS201207100    WAS   NL NA          NA
+</code></pre>
+
+<pre><code class="r">
+# Teams with the fewest All-Stars
+rare &lt;- names(which(table(AllstarFull$teamID) &lt; 10))
+
+# Records associated with the &#39;rare&#39; teams:
+# (There are two teamID typos: can you spot them?)
+subset(AllstarFull, teamID %in% rare)
+</code></pre>
+
+<pre><code>##       playerID yearID gameNum       gameID teamID lgID GP startingPos
+## 2076 heganmi01   1969       0 ALS196907230    SE1   AL  0          NA
+## 2091 minchdo01   1969       0 ALS196907230    SE1   AL  1          NA
+## 4540  penaca01   2009       0 NLS200907140    TBR   AL  0          NA
+## 4689 ellsbja01   2011       0 NLS201107120    BIS   AL  1          NA
+## 4748 ventejo01   2011       0 NLS201107120    ARL   NL  1          NA
+## 4833 stantmi03   2012       0 ALS201207100    MIA   NL NA          NA
+</code></pre>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>Lahman</em> version 2.0-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

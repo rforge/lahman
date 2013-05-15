@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Variable Labels</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="highlight.css">
+<script src="highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for battingLabels {Lahman}"><tr><td>battingLabels {Lahman}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+Variable Labels
+</h2>
+
+<h3>Description</h3>
+
+
+<p>These data frames provide descriptive labels for the variables in the
+<code><a href="Batting.html">Batting</a></code>, 
+<code><a href="Pitching.html">Pitching</a></code> and
+<code><a href="Fielding.html">Fielding</a></code> files (and related <code>*Post</code> files).
+They are useful for plots and other output using <code><a href="../../Hmisc/html/label.html">Label</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+data(battingLabels)
+
+data(fieldingLabels)
+
+data(pitchingLabels)
+</pre>
+
+
+<h3>Format</h3>
+
+
+<p>Each is data frame with observations on the following 2 variables.
+</p>
+
+<dl>
+<dt><code>variable</code></dt><dd><p>variable name</p>
+</dd>
+<dt><code>label</code></dt><dd><p>variable label</p>
+</dd>
+</dl>
+
+
+
+<h3>See Also</h3>
+
+
+<p><code><a href="../../Hmisc/html/label.html">Label</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+data(battingLabels)
+str(battingLabels)
+</code></pre>
+
+<pre><code>## &#39;data.frame&#39;:    24 obs. of  2 variables:
+##  $ variable: chr  &quot;playerID&quot; &quot;yearID&quot; &quot;stint&quot; &quot;teamID&quot; ...
+##  $ label   : chr  &quot;Player ID code&quot; &quot;Year&quot; &quot;Player&#39;s stint&quot; &quot;Team&quot; ...
+</code></pre>
+
+<pre><code class="r">
+require(plyr)
+# find and plot maximum number of homers per year
+batHR &lt;- ddply(subset(Batting, !is.na(HR)), .(yearID),
+        summarise, max=max(HR))
+
+with(batHR, {
+  plot(yearID, max, 
+       xlab=Label(&quot;yearID&quot;), ylab=paste(&quot;Maximum&quot;, Label(&quot;HR&quot;)), 
+       cex=0.8)
+  lines(lowess(yearID, max), col=&quot;blue&quot;, lwd=2)
+  abline(lm(max ~ yearID), col=&quot;red&quot;, lwd=2)
+    })
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>Lahman</em> version 2.0-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

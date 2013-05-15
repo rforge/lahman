@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Lookup Information for Players and Teams</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="highlight.css">
+<script src="highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for playerInfo {Lahman}"><tr><td>playerInfo {Lahman}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+Lookup Information for Players and Teams
+</h2>
+
+<h3>Description</h3>
+
+
+<p>These functions use <code>grep</code> to lookup information about players
+(from the <code><a href="Master.html">Master</a></code> file)
+and teams (from the <code><a href="Teams.html">Teams</a></code> file).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+playerInfo(playerID, nameFirst, nameLast, data = Master, extra = NULL, ...)
+
+teamInfo(teamID, name, data = Teams, extra = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+
+<table summary="R argblock">
+<tr valign="top"><td><code>playerID</code></td>
+<td>
+
+<p>pattern for <code>playerID</code>
+</p>
+</td></tr>
+<tr valign="top"><td><code>nameFirst</code></td>
+<td>
+
+<p>pattern for first name
+</p>
+</td></tr>
+<tr valign="top"><td><code>nameLast</code></td>
+<td>
+
+<p>pattern for last name
+</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>The name of the dataset to search
+</p>
+</td></tr>
+<tr valign="top"><td><code>extra</code></td>
+<td>
+
+<p>A character vector of other fields to include in the result
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>other arguments passed to <code><a href="../../base/html/grep.html">grep</a></code>
+</p>
+</td></tr>
+<tr valign="top"><td><code>teamID</code></td>
+<td>
+
+<p>pattern for <code>teamID</code> 
+</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+
+<p>pattern for team name
+</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+
+<p>Returns a data frame for unique matching rows from <code>data</code>
+
+
+
+
+
+</p>
+
+
+<h3>Author(s)</h3>
+
+
+<p>Michael Friendly
+</p>
+
+
+<h3>See Also</h3>
+
+
+<p><code><a href="../../base/html/grep.html">grep</a></code>, ~~~
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+    playerInfo(&quot;aaron&quot;)
+</code></pre>
+
+<pre><code>##    playerID nameFirst nameLast
+## 1 aaronha01      Hank    Aaron
+## 2 aaronto01    Tommie    Aaron
+</code></pre>
+
+<pre><code class="r">
+  teamInfo(&quot;CH&quot;, extra=&quot;park&quot;)
+</code></pre>
+
+<pre><code>##     teamID                              name                    park
+## 2      CH1           Chicago White Stockings Union Base-Ball Grounds
+## 33     CH2           Chicago White Stockings     23rd Street Grounds
+## 52     CHN           Chicago White Stockings     23rd Street Grounds
+## 149    CHU Chicago/Pittsburgh (Union League)                    &lt;NA&gt;
+## 258    CHP                   Chicago Pirates                    &lt;NA&gt;
+## 386    CHA                 Chicago White Sox      South Side Park II
+## 603    CHF                  Chicago Chi-Feds           Wrigley Field
+</code></pre>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>Lahman</em> version 2.0-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

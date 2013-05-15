@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Calculcate additional batting statistics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="highlight.css">
+<script src="highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for battingStats {Lahman}"><tr><td>battingStats {Lahman}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+Calculcate additional batting statistics
+</h2>
+
+<h3>Description</h3>
+
+
+<p>The <code><a href="Batting.html">Batting</a></code> does not contain batting statistics derived from those
+present in the data.frame.  This function calculates
+batting average (<code>BA</code>),
+plate appearances (<code>PA</code>),
+total bases (<code>TB</code>),
+slugging percentage (<code>SlugPct</code>),
+on-base percentage (<code>OBP</code>),
+on-base percentage + slugging (<code>OPS</code>), and
+batting average on balls in play (<code>BABIP</code>)
+for each record in a Batting-like data.frame.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+battingStats(data = Batting, idvars = c("playerID", "yearID", "stint", "teamID", "lgID"), 
+             cbind = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>input data, typically <code><a href="Batting.html">Batting</a></code>
+</p>
+</td></tr>
+<tr valign="top"><td><code>idvars</code></td>
+<td>
+
+<p>ID variables to include in the output data.frame
+</p>
+</td></tr>
+<tr valign="top"><td><code>cbind</code></td>
+<td>
+
+<p>If <code>TRUE</code>, the calculated statistics are appended to the input data as additional columns
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+
+<p>Standard calculations, e.g., <code>BA &lt;- H/AB</code> are problematic because of the
+presence of <code>NA</code>s and zeros.  This function tries to deal with those
+problems.
+</p>
+
+
+<h3>Value</h3>
+
+
+<p>A data.frame with all the observations in <code>data</code>.
+If <code>cbind==FALSE</code>, only the <code>idvars</code> and the calculated variables are returned.
+
+
+
+
+
+</p>
+
+
+<h3>Author(s)</h3>
+
+
+<p>Michael Friendly, Dennis Murphy
+</p>
+
+
+<h3>See Also</h3>
+
+
+<p><code><a href="Batting.html">Batting</a></code>, <code><a href="BattingPost.html">BattingPost</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+    bstats &lt;- battingStats()
+    str(bstats)
+</code></pre>
+
+<pre><code>## &#39;data.frame&#39;:    96600 obs. of  31 variables:
+##  $ playerID : chr  &quot;aardsda01&quot; &quot;aardsda01&quot; &quot;aardsda01&quot; &quot;aardsda01&quot; ...
+##  $ yearID   : int  2004 2006 2007 2008 2009 2010 2012 1954 1955 1956 ...
+##  $ stint    : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ teamID   : Factor w/ 149 levels &quot;ALT&quot;,&quot;ANA&quot;,&quot;ARI&quot;,..: 117 35 33 16 116 116 93 80 80 80 ...
+##  $ lgID     : Factor w/ 7 levels &quot;AA&quot;,&quot;AL&quot;,&quot;FL&quot;,..: 5 5 2 2 2 2 2 5 5 5 ...
+##  $ G        : int  11 45 25 47 73 53 1 122 153 153 ...
+##  $ G_batting: int  11 43 2 5 3 4 NA 122 153 153 ...
+##  $ AB       : int  0 2 0 1 0 0 NA 468 602 609 ...
+##  $ R        : int  0 0 0 0 0 0 NA 58 105 106 ...
+##  $ H        : int  0 0 0 0 0 0 NA 131 189 200 ...
+##  $ X2B      : int  0 0 0 0 0 0 NA 27 37 34 ...
+##  $ X3B      : int  0 0 0 0 0 0 NA 6 9 14 ...
+##  $ HR       : int  0 0 0 0 0 0 NA 13 27 26 ...
+##  $ RBI      : int  0 0 0 0 0 0 NA 69 106 92 ...
+##  $ SB       : int  0 0 0 0 0 0 NA 2 3 2 ...
+##  $ CS       : int  0 0 0 0 0 0 NA 2 1 4 ...
+##  $ BB       : int  0 0 0 0 0 0 NA 28 49 37 ...
+##  $ SO       : int  0 0 0 1 0 0 NA 39 61 54 ...
+##  $ IBB      : int  0 0 0 0 0 0 NA NA 5 6 ...
+##  $ HBP      : int  0 0 0 0 0 0 NA 3 3 2 ...
+##  $ SH       : int  0 1 0 0 0 0 NA 6 7 5 ...
+##  $ SF       : int  0 0 0 0 0 0 NA 4 4 7 ...
+##  $ GIDP     : int  0 0 0 0 0 0 NA 13 20 21 ...
+##  $ G_old    : int  11 45 2 5 NA NA NA 122 153 153 ...
+##  $ BA       : num  NA 0 NA 0 NA NA NA 0.28 0.314 0.328 ...
+##  $ PA       : num  0 3 0 1 0 0 0 509 665 660 ...
+##  $ TB       : num  0 0 0 0 0 0 0 209 325 340 ...
+##  $ SlugPct  : num  NA 0 NA 0 NA NA NA 0.447 0.54 0.558 ...
+##  $ OBP      : num  NA 0 NA 0 NA NA NA 0.322 0.366 0.365 ...
+##  $ OPS      : num  NA 0 NA 0 NA NA NA 0.769 0.906 0.923 ...
+##  $ BABIP    : num  NA 0 NA NaN NA NA NA 0.281 0.313 0.325 ...
+</code></pre>
+
+<pre><code class="r">    bstats &lt;- battingStats(cbind=FALSE)
+    str(bstats)
+</code></pre>
+
+<pre><code>## &#39;data.frame&#39;:    96600 obs. of  12 variables:
+##  $ playerID: chr  &quot;aardsda01&quot; &quot;aardsda01&quot; &quot;aardsda01&quot; &quot;aardsda01&quot; ...
+##  $ yearID  : int  2004 2006 2007 2008 2009 2010 2012 1954 1955 1956 ...
+##  $ stint   : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ teamID  : Factor w/ 149 levels &quot;ALT&quot;,&quot;ANA&quot;,&quot;ARI&quot;,..: 117 35 33 16 116 116 93 80 80 80 ...
+##  $ lgID    : Factor w/ 7 levels &quot;AA&quot;,&quot;AL&quot;,&quot;FL&quot;,..: 5 5 2 2 2 2 2 5 5 5 ...
+##  $ BA      : num  NA 0 NA 0 NA NA NA 0.28 0.314 0.328 ...
+##  $ PA      : num  0 3 0 1 0 0 0 509 665 660 ...
+##  $ TB      : num  0 0 0 0 0 0 0 209 325 340 ...
+##  $ SlugPct : num  NA 0 NA 0 NA NA NA 0.447 0.54 0.558 ...
+##  $ OBP     : num  NA 0 NA 0 NA NA NA 0.322 0.366 0.365 ...
+##  $ OPS     : num  NA 0 NA 0 NA NA NA 0.769 0.906 0.923 ...
+##  $ BABIP   : num  NA 0 NA NaN NA NA NA 0.281 0.313 0.325 ...
+</code></pre>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>Lahman</em> version 2.0-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

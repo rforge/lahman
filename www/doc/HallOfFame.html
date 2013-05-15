@@ -1,0 +1,334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Hall of Fame Voting Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="highlight.css">
+<script src="highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for HallOfFame {Lahman}"><tr><td>HallOfFame {Lahman}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+Hall of Fame Voting Data
+</h2>
+
+<h3>Description</h3>
+
+
+<p>Hall of Fame table. This is comprised of the voting results for all candidates nominated for the
+Baseball Hall of Fame.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(HallOfFame)</pre>
+
+
+<h3>Format</h3>
+
+
+<p>A data frame with 4015 observations on the following 8 variables.
+</p>
+
+<dl>
+<dt><code>hofID</code></dt><dd><p>Player ID code</p>
+</dd>
+<dt><code>yearID</code></dt><dd><p>Year of ballot</p>
+</dd>
+<dt><code>votedBy</code></dt><dd><p>Method by which player was voted upon.  See Details</p>
+</dd>
+<dt><code>ballots</code></dt><dd><p>Total ballots cast in that year</p>
+</dd>
+<dt><code>needed</code></dt><dd><p>Number of votes needed for selection in that year</p>
+</dd>
+<dt><code>votes</code></dt><dd><p>Total votes received</p>
+</dd>
+<dt><code>inducted</code></dt><dd><p>Whether player was inducted by that vote or not (Y or N)</p>
+</dd>
+<dt><code>category</code></dt><dd><p>Category of candidate; a factor with levels <code>Manager</code> <code>Pioneer/Executive</code> <code>Player</code> <code>Umpire</code></p>
+</dd>
+<dt><code>needed_note</code></dt><dd><p>Explanation of qualifiers for special elections</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+
+<p>This table links to the <code><a href="Master.html">Master</a></code> table via the <code>hofID</code>.
+</p>
+<p><code>votedBy</code>: Most Hall of Fame inductees have been elected by the 
+Baseball Writers Association of America (<code>BBWAA</code>).  Rules for election are
+described in <a href="http://en.wikipedia.org/wiki/National_Baseball_Hall_of_Fame_and_Museum#Selection_process">http://en.wikipedia.org/wiki/National_Baseball_Hall_of_Fame_and_Museum#Selection_process</a>.
+</p>
+
+
+<h3>Source</h3>
+
+
+<p>Lahman, S. (2010) Lahman's Baseball Database, 1871-2010, v.5.8, <a href="http://baseball1.com/statistics/">http://baseball1.com/statistics/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+## Some examples for  Hall of Fame induction data
+
+data(&#39;HallOfFame&#39;)
+require(&#39;plyr&#39;)          ## extensive use of plyr for data manipulation 
+require(&#39;ggplot2&#39;)
+
+############################################################
+## Some simple queries
+
+# What are the different types of votedBy?
+table(HallOfFame$votedBy)
+</code></pre>
+
+<pre><code>## 
+##            BBWAA       Centennial     Final Ballot     Negro League 
+##             3587                6               21               26 
+##  Nominating Vote       Old Timers          Run Off Special Election 
+##               76               30               81                2 
+##         Veterans 
+##              186
+</code></pre>
+
+<pre><code class="r">
+# What was the first year of Hall of Fame elections?
+sort(unique(HallOfFame$yearID))[1]
+</code></pre>
+
+<pre><code>## [1] 1936
+</code></pre>
+
+<pre><code class="r"># Who comprised the original class?
+subset(HallOfFame, yearID == 1936 &amp; inducted == &#39;Y&#39;)
+</code></pre>
+
+<pre><code>##        hofID yearID votedBy ballots needed votes inducted category
+## 1  cobbty01h   1936   BBWAA     226    170   222        Y   Player
+## 2  ruthba01h   1936   BBWAA     226    170   215        Y   Player
+## 3 wagneho01h   1936   BBWAA     226    170   215        Y   Player
+## 4 mathech01h   1936   BBWAA     226    170   205        Y   Player
+## 5 johnswa01h   1936   BBWAA     226    170   189        Y   Player
+##   needed_note
+## 1        &lt;NA&gt;
+## 2        &lt;NA&gt;
+## 3        &lt;NA&gt;
+## 4        &lt;NA&gt;
+## 5        &lt;NA&gt;
+</code></pre>
+
+<pre><code class="r">
+# Result of a player&#39;s last year on the BBWAA ballot
+# Restrict to players voted by BBWAA:
+HOFplayers &lt;- subset(HallOfFame, votedBy == &#39;BBWAA&#39; &amp; category == &#39;Player&#39;)
+
+
+# Function to calculate number of years as HOF candidate, last pct vote, etc.
+# for a given player
+HOFun &lt;- function(d) {
+    nyears &lt;- nrow(d)
+    fy &lt;- d[nyears, ]
+    lastPct &lt;- with(fy, 100 * round(votes/ballots, 3))
+    data.frame(hofID = fy$hofID, nyears, induct = fy$inducted,
+               lastPct, lastYear = fy$yearID)
+}
+
+playerOutcomesHOF &lt;- ddply(HOFplayers, .(hofID), HOFun)
+
+
+############################################################
+# How many voting years until election?
+inducted &lt;- subset(playerOutcomesHOF,induct == &#39;Y&#39;)
+table(inducted$nyears)
+</code></pre>
+
+<pre><code>## 
+##  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 
+## 43 10  8  7  8  4  2  4  6  3  3  1  4  1  2
+</code></pre>
+
+<pre><code class="r">barplot(table(inducted$nyears), main=&quot;Number of voting years until election&quot;,
+        ylab=&quot;Number of players&quot;, xlab=&quot;Years&quot;)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">
+# What is the form of this distribution?
+require(&#39;vcd&#39;)
+</code></pre>
+
+<pre><code>## Loading required package: vcd
+</code></pre>
+
+<pre><code>## Loading required package: MASS
+</code></pre>
+
+<pre><code>## Loading required package: grid
+</code></pre>
+
+<pre><code>## Loading required package: colorspace
+</code></pre>
+
+<pre><code>## Warning: package &#39;colorspace&#39; was built under R version 2.15.3
+</code></pre>
+
+<pre><code class="r">goodfit(inducted$nyears)
+</code></pre>
+
+<pre><code>## 
+## Observed and fitted values for poisson distribution
+## with parameters estimated by `ML&#39; 
+## 
+##  count observed    fitted
+##      0        0  1.519158
+##      1       43  6.449255
+##      2       10 13.689456
+##      3        8 19.371871
+##      4        7 20.559769
+##      5        8 17.456408
+##      6        4 12.351232
+##      7        2  7.490639
+##      8        4  3.974985
+##      9        6  1.874993
+##     10        3  0.795988
+##     11        3  0.307199
+##     12        1  0.108679
+##     13        4  0.035490
+##     14        1  0.010762
+##     15        2  0.003046
+</code></pre>
+
+<pre><code class="r">plot(goodfit(inducted$nyears), xlab=&#39;Number of years&#39;,
+    main=&quot;Poissonness plot of number of years voting until election&quot;)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">Ord_plot(table(inducted$nyears), xlab=&#39;Number of years&#39;)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">
+
+
+# First ballot inductees:
+subset(playerOutcomesHOF, nyears == 1L &amp; induct == &#39;Y&#39;)
+</code></pre>
+
+<pre><code>##           hofID nyears induct lastPct lastYear
+## 1    aaronha01h      1      Y    97.8     1982
+## 39   bankser01h      1      Y    83.8     1977
+## 58   benchjo01h      1      Y    96.4     1989
+## 84   boggswa01h      1      Y    91.9     2005
+## 102  brettge01h      1      Y    98.2     1999
+## 107  brocklo01h      1      Y    79.7     1985
+## 147  carewro01h      1      Y    90.5     1991
+## 149  carltst01h      1      Y    95.6     1994
+## 182   cobbty01h      1      Y    98.2     1936
+## 274  eckerde01h      1      Y    83.2     2004
+## 294  fellebo01h      1      Y    93.8     1962
+## 342  gibsobo01h      1      Y    84.0     1981
+## 384  gwynnto01h      1      Y    97.6     2007
+## 411  henderi01h      1      Y    94.8     2009
+## 460  jacksre01h      1      Y    93.6     1993
+## 473  johnswa01h      1      Y    83.6     1936
+## 489  kalinal01h      1      Y    88.3     1980
+## 520  koufasa01h      1      Y    86.9     1972
+## 583  mantlmi01h      1      Y    88.2     1974
+## 598  mathech01h      1      Y    90.7     1936
+## 610   mayswi01h      1      Y    94.7     1979
+## 616  mccovwi01h      1      Y    81.4     1986
+## 658  molitpa01h      1      Y    85.2     2004
+## 669  morgajo02h      1      Y    81.8     1990
+## 683  murraed02h      1      Y    85.3     2003
+## 686  musiast01h      1      Y    93.2     1969
+## 721  palmeji01h      1      Y    92.6     1990
+## 760  puckeki01h      1      Y    82.1     2001
+## 793  ripkeca01h      1      Y    98.5     2007
+## 801  robinbr01h      1      Y    92.0     1983
+## 802  robinfr02h      1      Y    89.2     1982
+## 803  robinja02h      1      Y    77.5     1962
+## 822   ruthba01h      1      Y    95.1     1936
+## 824   ryanno01h      1      Y    98.8     1999
+## 844  schmimi01h      1      Y    96.5     1995
+## 854  seaveto01h      1      Y    98.8     1992
+## 886  smithoz01h      1      Y    91.7     2002
+## 903  stargwi01h      1      Y    82.4     1988
+## 985  wagneho01h      1      Y    95.1     1936
+## 1027 willite01h      1      Y    93.4     1966
+## 1033 winfida01h      1      Y    84.5     2001
+## 1046 yastrca01h      1      Y    94.6     1989
+## 1054 yountro01h      1      Y    77.5     1999
+</code></pre>
+
+<pre><code class="r">
+# Who took at least ten years on the ballot before induction?
+# (Doesn&#39;t include Bert Blyleven, who was inducted in 2011.)
+subset(playerOutcomesHOF, nyears &gt;= 10L &amp; induct == &#39;Y&#39;)
+</code></pre>
+
+<pre><code>##          hofID nyears induct lastPct lastYear
+## 80  blylebe01h     14      Y    79.7     2011
+## 93  boudrlo01h     10      Y    77.3     1970
+## 210 cronijo01h     10      Y    78.8     1956
+## 264 drysddo01h     10      Y    78.4     1984
+## 402 hartnga01h     11      Y    77.7     1955
+## 407 heilmha01h     11      Y    86.8     1952
+## 506 kinerra01h     13      Y    75.4     1975
+## 548 lemonbo01h     12      Y    78.6     1976
+## 585 maranra01h     13      Y    82.9     1954
+## 785  riceji01h     15      Y    76.4     2009
+## 889 snidedu01h     11      Y    86.5     1980
+## 926 suttebr01h     13      Y    76.9     2006
+## 938 terrybi01h     13      Y    77.4     1954
+## 971 vanceda01h     15      Y    81.7     1955
+</code></pre>
+
+<pre><code class="r">
+############################################################
+## Plots of voting percentages over time for the borderline
+## HOF candidates, according to the BBWAA:
+
+# (1) Set up the data:
+longTimers &lt;- as.character(unlist(subset(playerOutcomesHOF,
+                                         nyears &gt;= 10, select = &#39;hofID&#39;)))
+HOFlt &lt;- subset(HallOfFame, hofID %in% longTimers &amp; votedBy == &#39;BBWAA&#39;)
+HOFlt &lt;- ddply(HOFlt, .(hofID), mutate,
+                  elected = ifelse(any(inducted == &#39;Y&#39;),&quot;Elected&quot;, &quot;Not elected&quot;),
+                  pct = 100 * round(votes/ballots, 3))
+
+# Plot the voting profiles:
+ggplot(HOFlt, aes(x = yearID, y = pct,
+                  group = hofID)) +
+    ggtitle(&quot;Profiles of voting percentage for long-time HOF candidates&quot;) +
+    geom_line() +
+    geom_hline(yintercept = 75, col = &#39;red&#39;) +
+    labs(list(x = &quot;Year&quot;, y = &quot;Percentage of votes&quot;)) +
+    facet_wrap(~ elected, ncol = 1)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">
+# Note: All but one of the players whose maximum voting percentage
+# was over 60% and was not elected by the BBWAA has eventually been inducted
+# into the HOF. Red Ruffing was elected in a 1967 runoff election while
+# the others have been voted in by the Veterans Committee. The lone
+# exception is Gil Hodges; his profile is the one that flatlines around 60%
+# for several years in the late 70s and early 80s.
+
+</code></pre>
+
+
+<hr><div align="center">[Package <em>Lahman</em> version 2.0-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

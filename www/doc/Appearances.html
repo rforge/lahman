@@ -1,0 +1,412 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Appearances table</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="highlight.css">
+<script src="highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for Appearances {Lahman}"><tr><td>Appearances {Lahman}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+Appearances table
+</h2>
+
+<h3>Description</h3>
+
+
+<p>Data on player appearances
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(Appearances)</pre>
+
+
+<h3>Format</h3>
+
+
+<p>A data frame with 96737 observations on the following 20 variables.
+</p>
+
+<dl>
+<dt><code>yearID</code></dt><dd><p>Year</p>
+</dd>
+<dt><code>teamID</code></dt><dd><p>Team; a factor</p>
+</dd>
+<dt><code>lgID</code></dt><dd><p>League; a factor with levels <code>AA</code> <code>AL</code> <code>FL</code> <code>NL</code> <code>PL</code> <code>UA</code></p>
+</dd>
+<dt><code>playerID</code></dt><dd><p>Player ID code</p>
+</dd>
+</dl>
+
+<dl>
+<dt><code>G_all</code></dt><dd><p>Total games played</p>
+</dd>
+<dt><code>GS</code></dt><dd><p>Games started</p>
+</dd>
+<dt><code>G_batting</code></dt><dd><p>Games in which player batted</p>
+</dd>
+<dt><code>G_defense</code></dt><dd><p>Games in which player appeared on defense</p>
+</dd>
+<dt><code>G_p</code></dt><dd><p>Games as pitcher</p>
+</dd>
+<dt><code>G_c</code></dt><dd><p>Games as catcher</p>
+</dd>
+<dt><code>G_1b</code></dt><dd><p>Games as firstbaseman</p>
+</dd>
+<dt><code>G_2b</code></dt><dd><p>Games as secondbaseman</p>
+</dd>
+<dt><code>G_3b</code></dt><dd><p>Games as thirdbaseman</p>
+</dd>
+<dt><code>G_ss</code></dt><dd><p>Games as shortstop</p>
+</dd>
+<dt><code>G_lf</code></dt><dd><p>Games as leftfielder</p>
+</dd>
+<dt><code>G_cf</code></dt><dd><p>Games as centerfielder</p>
+</dd>
+<dt><code>G_rf</code></dt><dd><p>Games as right fielder</p>
+</dd>
+<dt><code>G_of</code></dt><dd><p>Games as outfielder</p>
+</dd>
+<dt><code>G_dh</code></dt><dd><p>Games as designated hitter</p>
+</dd>
+<dt><code>G_ph</code></dt><dd><p>Games as pinch hitter</p>
+</dd>
+<dt><code>G_pr</code></dt><dd><p>Games as pinch runner</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+
+<p>The Appearances table in the original version has some incorrect variable names.
+In particular, the 5th column is <code>career_year</code>.
+</p>
+
+
+<h3>Source</h3>
+
+
+<p>Lahman, S. (2010) Lahman's Baseball Database, 1871-2012, 2012 version, <a href="http://baseball1.com/statistics/">http://baseball1.com/statistics/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+data(Appearances)
+
+# some test cases
+# Henry Aaron spent the last two years of his career as DH in Milwaukee
+subset(Appearances, playerID == &#39;aaronha01&#39;)
+</code></pre>
+
+<pre><code>##       yearID teamID lgID  playerID G_all  GS G_batting G_defense G_p G_c
+## 36844   1954    ML1   NL aaronha01   122  NA       122       122   0   0
+## 37420   1955    ML1   NL aaronha01   153  NA       153       153   0   0
+## 38075   1956    ML1   NL aaronha01   153  NA       153       153   0   0
+## 38696   1957    ML1   NL aaronha01   151  NA       151       151   0   0
+## 39311   1958    ML1   NL aaronha01   153  NA       153       153   0   0
+## 39949   1959    ML1   NL aaronha01   154  NA       154       154   0   0
+## 40579   1960    ML1   NL aaronha01   153  NA       153       153   0   0
+## 41216   1961    ML1   NL aaronha01   155  NA       155       155   0   0
+## 41914   1962    ML1   NL aaronha01   156  NA       156       156   0   0
+## 42674   1963    ML1   NL aaronha01   161  NA       161       161   0   0
+## 43426   1964    ML1   NL aaronha01   145  NA       145       145   0   0
+## 44180   1965    ML1   NL aaronha01   150  NA       150       150   0   0
+## 44931   1966    ATL   NL aaronha01   158  NA       158       158   0   0
+## 45705   1967    ATL   NL aaronha01   155  NA       155       155   0   0
+## 46491   1968    ATL   NL aaronha01   160  NA       160       160   0   0
+## 47206   1969    ATL   NL aaronha01   147  NA       147       147   0   0
+## 48138   1970    ATL   NL aaronha01   150  NA       150       150   0   0
+## 49057   1971    ATL   NL aaronha01   139  NA       139       139   0   0
+## 49939   1972    ATL   NL aaronha01   129  NA       129       129   0   0
+## 50827   1973    ATL   NL aaronha01   120  NA       120       120   0   0
+## 51719   1974    ATL   NL aaronha01   112  89       112        89   0   0
+## 52633   1975    ML4   AL aaronha01   137 129       137         3   0   0
+## 53540   1976    ML4   AL aaronha01    85  70        85         1   0   0
+##       G_1b G_2b G_3b G_ss G_lf G_cf G_rf G_of G_dh G_ph G_pr
+## 36844    0    0    0    0  105    0   11  116   NA   NA   NA
+## 37420    0   27    0    0   26    0  105  126   NA   NA   NA
+## 38075    0    0    0    0    0    0  152  152   NA   NA   NA
+## 38696    0    0    0    0    1   69   83  150   NA   NA   NA
+## 39311    0    0    0    0    0   39  120  153   NA   NA   NA
+## 39949    0    0    5    0    0   13  144  152   NA   NA   NA
+## 40579    0    2    0    0    0    3  151  153   NA   NA   NA
+## 41216    0    0    2    0    0   71   88  154   NA   NA   NA
+## 41914    1    0    0    0    0   83   71  153   NA   NA   NA
+## 42674    0    0    0    0    0    0  161  161   NA   NA   NA
+## 43426    0   11    0    0    0    0  139  139   NA   NA   NA
+## 44180    0    0    0    0    0    0  148  148   NA   NA   NA
+## 44931    0    2    0    0    0    4  158  158   NA   NA   NA
+## 45705    0    1    0    0    0   11  141  152   NA   NA   NA
+## 46491   14    0    0    0    0    0  151  151   NA   NA   NA
+## 47206    4    0    0    0    0    0  144  144   NA   NA   NA
+## 48138   11    0    0    0    0    0  125  125   NA   NA   NA
+## 49057   71    0    0    0    1    0   59   60   NA   NA   NA
+## 49939  109    0    0    0    0    0   15   15   NA   NA   NA
+## 50827    0    0    0    0   87    0   18  105   NA   NA   NA
+## 51719    0    0    0    0   89    0    0   89    0   23    0
+## 52633    0    0    0    0    3    0    0    3  126    8    0
+## 53540    0    0    0    0    1    0    0    1   70   15    0
+</code></pre>
+
+<pre><code class="r"># Herb Washington, strictly a pinch runner for Oakland in 1974-5
+subset(Appearances, playerID == &#39;washihe01&#39;)
+</code></pre>
+
+<pre><code>##       yearID teamID lgID  playerID G_all GS G_batting G_defense G_p G_c
+## 52598   1974    OAK   AL washihe01    92  0        92         0   0   0
+## 53509   1975    OAK   AL washihe01    13  0        13         0   0   0
+##       G_1b G_2b G_3b G_ss G_lf G_cf G_rf G_of G_dh G_ph G_pr
+## 52598    0    0    0    0    0    0    0    0    0    0   92
+## 53509    0    0    0    0    0    0    0    0    0    0   13
+</code></pre>
+
+<pre><code class="r">subset(Appearances, playerID == &#39;thomeji01&#39;)
+</code></pre>
+
+<pre><code>##       yearID teamID lgID  playerID G_all  GS G_batting G_defense G_p G_c
+## 69468   1991    CLE   AL thomeji01    27  27        27        27   0   0
+## 70531   1992    CLE   AL thomeji01    40  37        40        40   0   0
+## 71694   1993    CLE   AL thomeji01    47  45        47        47   0   0
+## 72741   1994    CLE   AL thomeji01    98  90        98        94   0   0
+## 73966   1995    CLE   AL thomeji01   137 129       137       134   0   0
+## 75219   1996    CLE   AL thomeji01   151 145       151       150   0   0
+## 76466   1997    CLE   AL thomeji01   147 140       147       145   0   0
+## 77771   1998    CLE   AL thomeji01   123 120       123       117   0   0
+## 79077   1999    CLE   AL thomeji01   146 143       146       111   0   0
+## 80422   2000    CLE   AL thomeji01   158 154       158       107   0   0
+## 81779   2001    CLE   AL thomeji01   156 149       156       148   0   0
+## 83109   2002    CLE   AL thomeji01   147 146       147       128   0   0
+## 84438   2003    PHI   NL thomeji01   159 157       159       156   0   0
+## 85793   2004    PHI   NL thomeji01   143 140       143       134   0   0
+## 87117   2005    PHI   NL thomeji01    59  57        59        52   0   0
+## 88493   2006    CHA   AL thomeji01   143 139       143         3   0   0
+## 89881   2007    CHA   AL thomeji01   130 124       130         1   0   0
+## 91279   2008    CHA   AL thomeji01   149 139       149         0   0   0
+## 92659   2009    CHA   AL thomeji01   107  98       107         0   0   0
+## 92660   2009    LAN   NL thomeji01    17   0        17         0   0   0
+## 94026   2010    MIN   AL thomeji01   108  78       108         0   0   0
+## 95320   2011    CLE   AL thomeji01    93  78        93         1   0   0
+## 96616   2012    BAL   AL thomeji01    58  39        58         4   0   0
+##       G_1b G_2b G_3b G_ss G_lf G_cf G_rf G_of G_dh G_ph G_pr
+## 69468    0    0   27    0    0    0    0    0    0    0    0
+## 70531    0    0   40    0    0    0    0    0    0    1    0
+## 71694    0    0   47    0    0    0    0    0    0    2    0
+## 72741    0    0   94    0    0    0    0    0    0    7    0
+## 73966    0    0  134    0    0    0    0    0    1    8    0
+## 75219    0    0  150    0    0    0    0    0    1    5    1
+## 76466  145    0    0    0    0    0    0    0    0    7    0
+## 77771  117    0    0    0    0    0    0    0    6    3    0
+## 79077  111    0    0    0    0    0    0    0   34    3    0
+## 80422  107    0    0    0    0    0    0    0   48    4    0
+## 81779  148    0    0    0    0    0    0    0    5    7    0
+## 83109  128    0    0    0    0    0    0    0   18    1    0
+## 84438  156    0    0    0    0    0    0    0    2    2    0
+## 85793  134    0    0    0    0    0    0    0    6    3    0
+## 87117   52    0    0    0    0    0    0    0    5    2    0
+## 88493    3    0    0    0    0    0    0    0  136    4    0
+## 89881    1    0    0    0    0    0    0    0  123    6    0
+## 91279    0    0    0    0    0    0    0    0  139   10    0
+## 92659    0    0    0    0    0    0    0    0   98    9    0
+## 92660    0    0    0    0    0    0    0    0    0   17    0
+## 94026    0    0    0    0    0    0    0    0   78   30    0
+## 95320    0    0    1    0    0    0    0    0   78   15    0
+## 96616    4    0    0    0    0    0    0    0   36   19    0
+</code></pre>
+
+<pre><code class="r">subset(Appearances, playerID == &#39;hairsje02&#39;)
+</code></pre>
+
+<pre><code>##       yearID teamID lgID  playerID G_all  GS G_batting G_defense G_p G_c
+## 77048   1998    BAL   AL hairsje02     6   2         6         4   0   0
+## 78385   1999    BAL   AL hairsje02    50  49        50        50   0   0
+## 79695   2000    BAL   AL hairsje02    49  49        49        49   0   0
+## 81070   2001    BAL   AL hairsje02   159 154       159       156   0   0
+## 82399   2002    BAL   AL hairsje02   122 118       122       119   0   0
+## 83722   2003    BAL   AL hairsje02    58  56        58        48   0   0
+## 85123   2004    BAL   AL hairsje02    86  80        86        62   0   0
+## 86442   2005    CHN   NL hairsje02   114  91       114       104   0   0
+## 87762   2006    CHN   NL hairsje02    38  21        38        32   0   0
+## 87763   2006    TEX   AL hairsje02    63  24        63        56   0   0
+## 89149   2007    TEX   AL hairsje02    73  41        73        71   0   0
+## 90540   2008    CIN   NL hairsje02    80  62        80        73   0   0
+## 91927   2009    CIN   NL hairsje02    86  77        86        81   0   0
+## 91928   2009    NYA   AL hairsje02    45  21        45        41   0   0
+## 93287   2010    SDN   NL hairsje02   119 105       119       114   0   0
+## 94631   2011    MIL   NL hairsje02   120  92       120       112   0   0
+## 95929   2012    LAN   NL hairsje02    78  63        78        74   0   0
+##       G_1b G_2b G_3b G_ss G_lf G_cf G_rf G_of G_dh G_ph G_pr
+## 77048    0    4    0    0    0    0    0    0    0    0    3
+## 78385    0   50    0    0    0    0    0    0    0    0    1
+## 79695    0   49    0    0    0    0    0    0    0    0    0
+## 81070    0  156    0    0    0    0    0    0    0    0    3
+## 82399    0  119    0    0    0    0    0    0    0    2    2
+## 83722    0   48    0    0    0    0    0    0    8    1    1
+## 85123    0   12    1    0   10   15   27   52   20    2    3
+## 86442    0   44    0    1   20   48    1   62    0   15    1
+## 87762    1   24    0    0    3    0    5    8    0    7    2
+## 87763    0    1    1    3   35   12    7   52    0    4   13
+## 89149    0   16   10    2   21   22    6   49    0    6    5
+## 90540    0    7    1   36   24   17   12   42    0   10    0
+## 91927    0    9   33   31    9    3    5   17    0    7    0
+## 91928    0    3   16   11   10    2    9   19    0    4    8
+## 93287    0   47    3   62    4    0    8   12    0    7    1
+## 94631    0   30   49    2   23   20    0   42    0   13    4
+## 95929    1   30   32    2   18    0    0   18    1   10    0
+</code></pre>
+
+<pre><code class="r">
+# Appearances for the 1984 Cleveland Indians
+subset(Appearances, teamID == &quot;CLE&quot; &amp; yearID == 1984)
+</code></pre>
+
+<pre><code>##       yearID teamID lgID  playerID G_all  GS G_batting G_defense G_p G_c
+## 61239   1984    CLE   AL apontlu01    25   0         0        25  25   0
+## 61255   1984    CLE   AL bandoch01    75  60        75        64   0  63
+## 61262   1984    CLE   AL barklje01     3   0         0         3   3   0
+## 61275   1984    CLE   AL behenri01     3   0         0         3   3   0
+## 61285   1984    CLE   AL bernato01   140 122       140       136   0   0
+## 61295   1984    CLE   AL blylebe01    33   0         0        33  33   0
+## 61346   1984    CLE   AL butlebr01   159 149       159       156   0   0
+## 61354   1984    CLE   AL camacer01    69   0         0        69  69   0
+## 61363   1984    CLE   AL cartejo01    66  55        66        60   0   0
+## 61365   1984    CLE   AL castica01    87  56        87        70   0   0
+## 61392   1984    CLE   AL comerst01    22   0         0        22  22   0
+## 61459   1984    CLE   AL easteja01    26   0         0        26  26   0
+## 61472   1984    CLE   AL  farrst01    31   0         0        31  31   0
+## 61479   1984    CLE   AL fischmi01    85  45        85        83   0   0
+## 61496   1984    CLE   AL francju01   160 158       160       159   0   0
+## 61499   1984    CLE   AL frazige01    22   0         0        22  22   0
+## 61559   1984    CLE   AL  hallme01    83  65        83        69   0   0
+## 61562   1984    CLE   AL hargrmi01   133  85       133       124   0   0
+## 61571   1984    CLE   AL hassero01    48  39        48        45   0  44
+## 61578   1984    CLE   AL heatone01    38   0         0        38  38   0
+## 61630   1984    CLE   AL jacobbr01   126 125       126       126   0   0
+## 61634   1984    CLE   AL jeffcmi01    63   0         0        63  63   0
+## 61803   1984    CLE   AL moronje01     7   5         7         6   0   0
+## 61831   1984    CLE   AL nixonot01    49  29        49        46   0   0
+## 61832   1984    CLE   AL noboaju01    23   1        23        19   0   0
+## 61882   1984    CLE   AL perkibr01    58   7        58         2   0   0
+## 61907   1984    CLE   AL quirkja01     1   0         1         1   0   1
+## 61939   1984    CLE   AL rhombke01    13   2        13         9   0   0
+## 61962   1984    CLE   AL romanjo02     3   0         0         3   3   0
+## 61965   1984    CLE   AL romerra01     1   0         0         1   1   0
+## 62006   1984    CLE   AL schuldo01    19   0         0        19  19   0
+## 62045   1984    CLE   AL smithro01    22   0         0        22  22   0
+## 62055   1984    CLE   AL spillda01    14   0         0        14  14   0
+## 62082   1984    CLE   AL sutclri01    15   0         0        15  15   0
+## 62088   1984    CLE   AL tablepa01   144 131       144       139   0   0
+## 62105   1984    CLE   AL thornan01   155 155       155        11   0   0
+## 62123   1984    CLE   AL ujdurje01     4   0         0         4   4   0
+## 62139   1984    CLE   AL vukovge01   134 110       134       130   0   0
+## 62140   1984    CLE   AL waddeto01    58   0         0        58  58   0
+## 62174   1984    CLE   AL willaje01    87  68        87        76   0  76
+##       G_1b G_2b G_3b G_ss G_lf G_cf G_rf G_of G_dh G_ph G_pr
+## 61239    0    0    0    0    0    0    0    0    0    0   NA
+## 61255    1    0    1    0    0    0    0    0    1   13    0
+## 61262    0    0    0    0    0    0    0    0    0    0   NA
+## 61275    0    0    0    0    0    0    0    0    0    0   NA
+## 61285    0  136    0    0    0    0    0    0    0    3    4
+## 61295    0    0    0    0    0    0    0    0    0    0   NA
+## 61346    0    0    0    0    0  156    1  156    0    3    2
+## 61354    0    0    0    0    0    0    0    0    0    0   NA
+## 61363    7    0    0    0   48   14    0   59    0    8    1
+## 61365    0    0    0    0    0    0   70   70    0   26    1
+## 61392    0    0    0    0    0    0    0    0    0    0   NA
+## 61459    0    0    0    0    0    0    0    0    0    0   NA
+## 61472    0    0    0    0    0    0    0    0    0    0   NA
+## 61479    0   55   17   15    0    0    0    0    0    2    7
+## 61496    0    0    0  159    0    0    0    0    0    1    1
+## 61499    0    0    0    0    0    0    0    0    0    0   NA
+## 61559    0    0    0    0   64    1    6   69    9   13    0
+## 61562  124    0    0    0    0    0    0    0    0   20    0
+## 61571    1    0    0    0    0    0    0    0    1    3    0
+## 61578    0    0    0    0    0    0    0    0    0    0   NA
+## 61630    0    0  126    1    0    0    0    0    0    0    0
+## 61634    0    0    0    0    0    0    0    0    0    0   NA
+## 61803    0    0    6    0    0    0    0    0    0    1    1
+## 61831    0    0    0    0   43    4    0   46    0    0   10
+## 61832    0   19    0    0    0    0    0    0    0    0    6
+## 61882    2    0    0    0    0    0    0    0    6   50    1
+## 61907    0    0    0    0    0    0    0    0    0    0    0
+## 61939    1    1    0    0    7    0    0    7    0    3    4
+## 61962    0    0    0    0    0    0    0    0    0    0   NA
+## 61965    0    0    0    0    0    0    0    0    0    0   NA
+## 62006    0    0    0    0    0    0    0    0    0    0   NA
+## 62045    0    0    0    0    0    0    0    0    0    0   NA
+## 62055    0    0    0    0    0    0    0    0    0    0   NA
+## 62082    0    0    0    0    0    0    0    0    0    0   NA
+## 62088   67    1   36    0   43    0    0   43    1    8    4
+## 62105   11    0    0    0    0    0    0    0  144    0    0
+## 62123    0    0    0    0    0    0    0    0    0    0   NA
+## 62139    0    0    0    0   16    0  124  130    0   15    0
+## 62140    0    0    0    0    0    0    0    0    0    0   NA
+## 62174    0    0    0    0    0    0    0    0    1   12    0
+</code></pre>
+
+<pre><code class="r">
+
+if (require(reshape2) &amp; require(plyr)) {
+# Appearances for Pete Rose during his career:
+prose &lt;- subset(Appearances, playerID == &quot;rosepe01&quot;)
+
+
+# What was Pete Rose&#39;s primary position each year 
+# of his career?
+
+prose_melt &lt;- melt(prose, id = c(&quot;yearID&quot;, &quot;teamID&quot;),
+                          measure = 9:17)
+# Split out the position from variable
+prose_melt &lt;- cbind(prose_melt, colsplit(prose_melt$variable, 
+                                         &quot;_&quot;, names = c(&quot;G&quot;, &quot;pos&quot;)))
+
+# Two grouping variables because of an in-season trade in 1984
+primary_pos &lt;- ddply(prose_melt, .(yearID, teamID), summarise,
+                         top_pos = pos[which.max(value)],
+                         games = max(value))
+primary_pos
+
+# Most pitcher appearances each year since 1950
+ddply(subset(Appearances, yearID &gt;= 1950), .(yearID), summarise,
+                              maxPitcher = playerID[which.max(G_p)],
+                              maxAppear = max(G_p))
+
+# Individuals who have played all 162 games since 1961
+all162 &lt;- ddply(subset(Appearances, yearID &gt; 1960), .(yearID), summarise,
+                      allGamers = playerID[G_all == 162])
+# Number of all-gamers by year
+table(all162$yearID)
+}
+</code></pre>
+
+<pre><code>## Loading required package: reshape2
+</code></pre>
+
+<pre><code>## Loading required package: plyr
+</code></pre>
+
+<pre><code>## 
+## 1961 1962 1963 1964 1965 1966 1967 1968 1969 1970 1971 1973 1974 1975 1976 
+##    2    6    3    9    5    5    1    3    5    2    2    6    4    3    2 
+## 1977 1978 1979 1980 1982 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 
+##    4    4    8    7    8    4    5    4    5    2    2    5    2    3    4 
+## 1993 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 
+##    2    3    6    4    5    5    7    6    5    3   10    6    7    4    1 
+## 2010 2011 2012 
+##    2    1    4
+</code></pre>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>Lahman</em> version 2.0-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

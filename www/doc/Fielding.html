@@ -1,0 +1,407 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Fielding table</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="highlight.css">
+<script src="highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for Fielding {Lahman}"><tr><td>Fielding {Lahman}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+Fielding table
+</h2>
+
+<h3>Description</h3>
+
+
+<p>Fielding table
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(Fielding)</pre>
+
+
+<h3>Format</h3>
+
+
+<p>A data frame with 164898 observations on the following 18 variables.
+</p>
+
+<dl>
+<dt><code>playerID</code></dt><dd><p>Player ID code</p>
+</dd>
+<dt><code>yearID</code></dt><dd><p>Year</p>
+</dd>
+<dt><code>stint</code></dt><dd><p>player's stint (order of appearances within a season)</p>
+</dd>
+<dt><code>teamID</code></dt><dd><p>Team; a factor</p>
+</dd>
+<dt><code>lgID</code></dt><dd><p>League; a factor with levels <code>AA</code> <code>AL</code> <code>FL</code> <code>NL</code> <code>PL</code> <code>UA</code></p>
+</dd>
+<dt><code>POS</code></dt><dd><p>Position</p>
+</dd>
+<dt><code>G</code></dt><dd><p>Games </p>
+</dd>
+<dt><code>GS</code></dt><dd><p>Games Started</p>
+</dd>
+<dt><code>InnOuts</code></dt><dd><p>Time played in the field expressed as outs </p>
+</dd>
+<dt><code>PO</code></dt><dd><p>Putouts</p>
+</dd>
+<dt><code>A</code></dt><dd><p>Assists</p>
+</dd>
+<dt><code>E</code></dt><dd><p>Errors</p>
+</dd>
+<dt><code>DP</code></dt><dd><p>Double Plays</p>
+</dd>
+<dt><code>PB</code></dt><dd><p>Passed Balls (by catchers)</p>
+</dd>
+<dt><code>WP</code></dt><dd><p>Wild Pitches (by catchers)</p>
+</dd>
+<dt><code>SB</code></dt><dd><p>Opponent Stolen Bases (by catchers)</p>
+</dd>
+<dt><code>CS</code></dt><dd><p>Opponents Caught Stealing (by catchers)</p>
+</dd>
+<dt><code>ZR</code></dt><dd><p>Zone Rating</p>
+</dd>
+</dl>
+
+
+
+<h3>Source</h3>
+
+
+<p>Lahman, S. (2010) Lahman's Baseball Database, 1871-2012, 2012 version, <a href="http://baseball1.com/statistics/">http://baseball1.com/statistics/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+data(Fielding)
+# Basic fielding data
+
+require(plyr)
+
+
+# Roberto Clemente&#39;s fielding profile
+# pitching and catching related data removed
+subset(Fielding, playerID == &quot;clemero01&quot;)[, 1:13]
+</code></pre>
+
+<pre><code>##        playerID yearID stint teamID lgID POS   G  GS InnOuts  PO  A  E DP
+## 27656 clemero01   1955     1    PIT   NL  CF  10   7     202  20  0  0  0
+## 27657 clemero01   1955     1    PIT   NL  OF 118 107    2892 253 18  6  5
+## 27658 clemero01   1955     1    PIT   NL  RF 112 100    2690 230 18  6  4
+## 27659 clemero01   1956     1    PIT   NL  2B   2   0      18   1  1  1  0
+## 27660 clemero01   1956     1    PIT   NL  3B   1   0       6   0  2  1  0
+## 27661 clemero01   1956     1    PIT   NL  CF  23  18     496  51  1  3  0
+## 27662 clemero01   1956     1    PIT   NL  LF  25  18     510  36  1  4  1
+## 27663 clemero01   1956     1    PIT   NL  OF 139 130    3499 274 17 13  2
+## 27664 clemero01   1956     1    PIT   NL  RF 101  94    2493 192 15  6  1
+## 27665 clemero01   1957     1    PIT   NL  CF  14  11     306  29  2  1  1
+## 27666 clemero01   1957     1    PIT   NL  OF 109 107    2836 272  9  6  1
+## 27667 clemero01   1957     1    PIT   NL  RF  97  96    2530 243  7  5  0
+## 27668 clemero01   1958     1    PIT   NL  OF 135 129    3452 312 22  6  3
+## 27669 clemero01   1958     1    PIT   NL  RF 135 129    3452 309 24  6  3
+## 27670 clemero01   1959     1    PIT   NL  OF 104 102    2700 229 10 13  1
+## 27671 clemero01   1959     1    PIT   NL  RF 104 102    2700 228 11 13  1
+## 27672 clemero01   1960     1    PIT   NL  OF 142 140    3767 246 19  8  2
+## 27673 clemero01   1960     1    PIT   NL  RF 142 140    3767 252 18  8  1
+## 27674 clemero01   1961     1    PIT   NL  CF   1   0      15   3  1  0  1
+## 27675 clemero01   1961     1    PIT   NL  OF 144 142    3723 256 27  9  5
+## 27676 clemero01   1961     1    PIT   NL  RF 144 142    3708 250 26  9  4
+## 27677 clemero01   1962     1    PIT   NL  OF 142 138    3686 269 19  8  1
+## 27678 clemero01   1962     1    PIT   NL  RF 142 138    3686 270 20  8  1
+## 27679 clemero01   1963     1    PIT   NL  CF   8   8     213  14  0  1  0
+## 27680 clemero01   1963     1    PIT   NL  OF 151 148    3943 239 11 11  2
+## 27681 clemero01   1963     1    PIT   NL  RF 143 140    3730 225 12 10  2
+## 27682 clemero01   1964     1    PIT   NL  OF 154 154    4085 289 13 10  2
+## 27683 clemero01   1964     1    PIT   NL  RF 154 154    4085 282 13 10  2
+## 27684 clemero01   1965     1    PIT   NL  CF   4   0      16   1  0  0  0
+## 27685 clemero01   1965     1    PIT   NL  OF 145 143    3810 288 16 10  1
+## 27686 clemero01   1965     1    PIT   NL  RF 145 143    3794 280 16 10  1
+## 27687 clemero01   1966     1    PIT   NL  CF   1   1      24   1  0  0  0
+## 27688 clemero01   1966     1    PIT   NL  OF 154 153    4147 318 17 12  3
+## 27689 clemero01   1966     1    PIT   NL  RF 154 152    4123 318 17 12  3
+## 27690 clemero01   1967     1    PIT   NL  CF   2   0       6   1  0  0  0
+## 27691 clemero01   1967     1    PIT   NL  OF 145 141    3751 273 17  9  4
+## 27692 clemero01   1967     1    PIT   NL  RF 144 141    3745 272 17  9  3
+## 27693 clemero01   1968     1    PIT   NL  OF 131 128    3477 297  9  5  1
+## 27694 clemero01   1968     1    PIT   NL  RF 131 128    3477 297  9  5  1
+## 27695 clemero01   1969     1    PIT   NL  OF 135 128    3372 226 14  5  1
+## 27696 clemero01   1969     1    PIT   NL  RF 135 128    3372 199 26  5  1
+## 27697 clemero01   1970     1    PIT   NL  OF 104 102    2704 189 12  7  2
+## 27698 clemero01   1970     1    PIT   NL  RF 104 102    2704 188 11  7  3
+## 27699 clemero01   1971     1    PIT   NL  OF 124 120    3244 267 11  2  4
+## 27700 clemero01   1971     1    PIT   NL  RF 125 120    3244 269 11  2  4
+## 27701 clemero01   1972     1    PIT   NL  OF  94  88    2437 199  5  0  2
+## 27702 clemero01   1972     1    PIT   NL  RF  94  88    2437 199  5  0  2
+</code></pre>
+
+<pre><code class="r">
+# Yadier Molina&#39;s fielding profile
+# PB, WP, SP and CS apply to catchers
+subset(Fielding, playerID == &quot;molinya01&quot;)
+</code></pre>
+
+<pre><code>##         playerID yearID stint teamID lgID POS   G  GS InnOuts  PO  A  E DP
+## 102893 molinya01   2004     1    SLN   NL   C  51  39    1032 256 16  2  1
+## 102894 molinya01   2005     1    SLN   NL  1B   1   0       3   0  0  0  0
+## 102895 molinya01   2005     1    SLN   NL   C 114 111    2878 684 66  7  4
+## 102896 molinya01   2006     1    SLN   NL  1B   4   0      15   5  0  1  1
+## 102897 molinya01   2006     1    SLN   NL   C 127 118    3112 736 77  4  6
+## 102898 molinya01   2007     1    SLN   NL  1B   1   0       3   1  0  0  0
+## 102899 molinya01   2007     1    SLN   NL   C 107 101    2584 582 63  6  8
+## 102900 molinya01   2008     1    SLN   NL  1B   2   1      33  13  3  0  1
+## 102901 molinya01   2008     1    SLN   NL   C 119 114    3006 653 70 10  7
+## 102902 molinya01   2008     1    SLN   NL  DH   1  NA      NA  NA NA NA NA
+## 102903 molinya01   2009     1    SLN   NL  1B   6   0      30  10  1  0  2
+## 102904 molinya01   2009     1    SLN   NL   C 138 136    3530 884 82  5  6
+## 102905 molinya01   2010     1    SLN   NL  1B   7   0      21   7  0  0  2
+## 102906 molinya01   2010     1    SLN   NL   C 135 130    3414 895 79  5 10
+## 102907 molinya01   2011     1    SLN   NL  1B   2   0       6   3  0  1  0
+## 102908 molinya01   2011     1    SLN   NL   C 137 132    3450 857 67  5  5
+## 102909 molinya01   2012     1    SLN   NL  1B   3   0      27  11  2  0  0
+## 102910 molinya01   2012     1    SLN   NL   C 136 133    3484 962 88  3 12
+##        PB WP SB CS ZR
+## 102893  4 11  9  8  1
+## 102894 NA NA NA NA NA
+## 102895  8 26 14 25  9
+## 102896 NA NA NA NA NA
+## 102897  7 25 37 29  8
+## 102898 NA NA NA NA NA
+## 102899  7 24 23 27  2
+## 102900 NA NA NA NA NA
+## 102901  5 34 34 18  7
+## 102902 NA NA NA NA NA
+## 102903  0 NA  0  0 NA
+## 102904  4 NA 32 22 NA
+## 102905  0 NA  0  0 NA
+## 102906  7 NA 35 33 NA
+## 102907 NA NA NA NA NA
+## 102908  6 35 46 19 NA
+## 102909 NA NA NA NA NA
+## 102910  6 36 38 35 NA
+</code></pre>
+
+<pre><code class="r">
+# Pedro Martinez&#39;s fielding profile
+# Notice what pitchers get away with in this data frame :)
+subset(Fielding, playerID == &quot;martipe02&quot;)
+</code></pre>
+
+<pre><code>##        playerID yearID stint teamID lgID POS  G GS InnOuts PO  A E DP PB
+## 93757 martipe02   1992     1    LAN   NL   P  2  1      24  0  0 0  0 NA
+## 93758 martipe02   1993     1    LAN   NL  3B  1  1       0  0  0 0  0 NA
+## 93759 martipe02   1993     1    LAN   NL   P 65  2     321  4  4 0  1 NA
+## 93760 martipe02   1994     1    MON   NL   P 24 23     434  9 15 4  0 NA
+## 93761 martipe02   1995     1    MON   NL   P 30 30     584 14 23 2  0 NA
+## 93762 martipe02   1996     1    MON   NL   P 33 33     650 11 17 3  1 NA
+## 93763 martipe02   1997     1    MON   NL   P 31 31     724  7 31 1  1 NA
+## 93764 martipe02   1998     1    BOS   AL   P 33 33     701 11 18 4  3 NA
+## 93765 martipe02   1999     1    BOS   AL   P 31 29     640 13 15 1  0 NA
+## 93766 martipe02   2000     1    BOS   AL   P 29 29     651 14 28 0  2 NA
+## 93767 martipe02   2001     1    BOS   AL   P 18 18     350  5  5 0  0 NA
+## 93768 martipe02   2002     1    BOS   AL   P 30 30     598 16 17 2  1 NA
+## 93769 martipe02   2003     1    BOS   AL   P 29 29     560 14 20 0  0 NA
+## 93770 martipe02   2004     1    BOS   AL   P 33 33     651 16 16 1  0 NA
+## 93771 martipe02   2005     1    NYN   NL   P 31 31     651  6 19 0  0 NA
+## 93772 martipe02   2006     1    NYN   NL   P 23 23     398  7 13 5  0 NA
+## 93773 martipe02   2007     1    NYN   NL   P  5  5      84  1  0 0  0 NA
+## 93774 martipe02   2008     1    NYN   NL   P 20 20     327  6 17 0  1 NA
+## 93775 martipe02   2009     1    PHI   NL   P  9  9     134  1  6 0  1  0
+##       WP SB CS ZR
+## 93757 NA NA NA NA
+## 93758 NA NA NA NA
+## 93759 NA NA NA NA
+## 93760 NA NA NA NA
+## 93761 NA NA NA NA
+## 93762 NA NA NA NA
+## 93763 NA NA NA NA
+## 93764 NA NA NA NA
+## 93765 NA NA NA NA
+## 93766 NA NA NA NA
+## 93767 NA NA NA NA
+## 93768 NA NA NA NA
+## 93769 NA NA NA NA
+## 93770 NA NA NA NA
+## 93771 NA NA NA NA
+## 93772 NA NA NA NA
+## 93773 NA NA NA NA
+## 93774 NA NA NA NA
+## 93775 NA  0  0 NA
+</code></pre>
+
+<pre><code class="r">
+# Table of games played by Pete Rose at different positions
+with(subset(Fielding, playerID == &quot;rosepe01&quot;), xtabs(G ~ POS))
+</code></pre>
+
+<pre><code>## POS
+##   1B   2B   3B   CF   LF   OF   RF 
+##  939  628  634   73  673 1327  590
+</code></pre>
+
+<pre><code class="r">
+# Career total G/PO/A/E/DP for Luis Aparicio
+luis &lt;- subset(Fielding, playerID == &quot;aparilu01&quot;, 
+                  select = c(&quot;G&quot;, &quot;PO&quot;, &quot;A&quot;, &quot;E&quot;, &quot;DP&quot;))
+colwise(sum)(luis)
+</code></pre>
+
+<pre><code>##      G   PO    A   E   DP
+## 1 2583 4548 8016 366 1553
+</code></pre>
+
+<pre><code class="r">
+
+# Top ten 2B/SS in turning DPs
+dpkey &lt;- ddply(subset(Fielding, POS %in% c(&quot;2B&quot;, &quot;SS&quot;)), &quot;playerID&quot;, summarise, 
+                        TDP = sum(DP, na.rm = TRUE))
+head(arrange(dpkey, desc(TDP)), 10)
+</code></pre>
+
+<pre><code>##     playerID  TDP
+## 1  vizquom01 1773
+## 2  mazerbi01 1706
+## 3    foxne01 1619
+## 4  smithoz01 1590
+## 5  ripkeca01 1565
+## 6  aparilu01 1553
+## 7  randowi01 1547
+## 8  whitalo01 1527
+## 9  doerrbo01 1507
+## 10 morgajo02 1505
+</code></pre>
+
+<pre><code class="r">
+# League average fielding statistics, 1961-present
+
+fldg &lt;- subset(Fielding, yearID &gt;= 1961 &amp; POS != &quot;DH&quot;,
+                  select = c(&quot;yearID&quot;, &quot;lgID&quot;, &quot;POS&quot;, &quot;InnOuts&quot;, 
+                             &quot;PO&quot;, &quot;A&quot;, &quot;E&quot;))
+lgTotalsF &lt;- ddply(fldg, .(yearID, lgID), numcolwise(sum, na.rm = TRUE))
+(lgTotalsF &lt;- mutate(lgTotalsF,
+                      fpct = round( (PO + A)/(PO + A + E), 3), 
+                      OPE = round(InnOuts/E, 3) ))
+</code></pre>
+
+<pre><code>##     yearID lgID InnOuts    PO     A    E  fpct   OPE
+## 1     1961   AL  519366 53553 17563 1766 0.976 294.1
+## 2     1961   NL  396960 40669 14026 1354 0.976 293.2
+## 3     1962   AL  522504 53787 17411 1573 0.978 332.2
+## 4     1962   NL  521616 53077 18183 1817 0.975 287.1
+## 5     1963   AL  523845 53756 17308 1549 0.979 338.2
+## 6     1963   NL  523929 53028 18013 1805 0.975 290.3
+## 7     1964   AL  526134 53433 17428 1463 0.980 359.6
+## 8     1964   NL  522792 52860 18261 1858 0.975 281.4
+## 9     1965   AL  523416 53155 17511 1577 0.978 331.9
+## 10    1965   NL  527180 53356 18307 1737 0.976 303.5
+## 11    1966   AL  521736 53310 17462 1571 0.978 332.1
+## 12    1966   NL  523827 53139 18322 1736 0.976 301.7
+## 13    1967   AL  525672 53463 17503 1534 0.979 342.7
+## 14    1967   NL  524942 53283 18346 1649 0.977 318.3
+## 15    1968   AL  523890 53410 17550 1569 0.978 333.9
+## 16    1968   NL  528504 53567 18558 1644 0.978 321.5
+## 17    1969   AL  630119 64446 21680 1952 0.978 322.8
+## 18    1969   NL  625938 63060 21587 2078 0.976 301.2
+## 19    1970   AL  628026 64312 21508 1885 0.979 333.2
+## 20    1970   NL  626820 63601 21446 1996 0.977 314.0
+## 21    1971   AL  622461 64327 21386 1753 0.980 355.1
+## 22    1971   NL  629124 64814 21952 1892 0.979 332.5
+## 23    1972   AL  599519 61847 20573 1746 0.979 343.4
+## 24    1972   NL  604680 62226 20787 1894 0.978 319.3
+## 25    1973   AL  626247 65053 22015 1984 0.978 315.6
+## 26    1973   NL  629351 65001 21950 2049 0.977 307.1
+## 27    1974   AL  628152 65914 21933 2040 0.977 307.9
+## 28    1974   NL  629772 65298 22207 2127 0.976 296.1
+## 29    1975   AL  621852 65033 22028 2140 0.976 290.6
+## 30    1975   NL  628209 65239 22240 2162 0.976 290.6
+## 31    1976   AL  628860 66358 22239 1994 0.978 315.4
+## 32    1976   NL  628464 65552 22283 2037 0.977 308.5
+## 33    1977   AL  728061 75935 25678 2333 0.978 312.1
+## 34    1977   NL  630503 65306 22250 2015 0.978 312.9
+## 35    1978   AL  725877 76633 25769 2290 0.978 317.0
+## 36    1978   NL  624000 64874 21920 1961 0.978 318.2
+## 37    1979   AL  721857 76116 25958 2278 0.978 316.9
+## 38    1979   NL  627306 65378 21987 1957 0.978 320.5
+## 39    1980   AL  731901 77186 26146 2265 0.979 323.1
+## 40    1980   NL  631014 65656 22787 1966 0.978 321.0
+## 41    1981   AL  484545 51185 17453 1363 0.981 355.5
+## 42    1981   NL  418839 43630 15284 1318 0.978 317.8
+## 43    1982   AL  732000 77263 25418 2066 0.980 354.3
+## 44    1982   NL  631560 65366 22716 1973 0.978 320.1
+## 45    1983   AL  730047 77223 25460 2156 0.979 338.6
+## 46    1983   NL  628560 65216 22020 1935 0.978 324.8
+## 47    1984   AL  730048 77300 24744 2152 0.979 339.2
+## 48    1984   NL  627288 65045 21964 1951 0.978 321.5
+## 49    1985   AL  726624 76530 24632 2101 0.980 345.8
+## 50    1985   NL  629088 64836 22216 1897 0.979 331.6
+## 51    1986   AL  727317 76281 23838 2108 0.979 345.0
+## 52    1986   NL  628956 64715 21875 1941 0.978 324.0
+## 53    1987   AL  727044 75717 24149 2046 0.980 355.3
+## 54    1987   NL  625644 64436 21693 1815 0.979 344.7
+## 55    1988   AL  726720 76788 23956 2020 0.980 359.8
+## 56    1988   NL  629301 65414 21565 1826 0.979 344.6
+## 57    1989   AL  726446 76389 24906 2068 0.980 351.3
+## 58    1989   NL  631224 65828 20984 1864 0.979 338.6
+## 59    1990   AL  726564 76163 24455 1976 0.981 367.7
+## 60    1990   NL  625728 65558 20744 1778 0.980 351.9
+## 61    1991   AL  733752 76833 24890 1907 0.982 384.8
+## 62    1991   NL  625956 64975 21273 1731 0.980 361.6
+## 63    1992   AL  731844 77271 24749 1939 0.981 377.4
+## 64    1992   NL  630024 65823 21415 1634 0.982 385.6
+## 65    1993   AL  728004 76462 24419 1890 0.982 385.2
+## 66    1993   NL  730221 76215 24923 2214 0.979 329.8
+## 67    1994   AL  512268 53626 17058 1356 0.981 377.8
+## 68    1994   NL  516840 53482 17642 1428 0.980 361.9
+## 69    1995   AL  647136 67516 21493 1611 0.982 401.7
+## 70    1995   NL  650016 66689 22260 1821 0.980 357.0
+## 71    1996   AL  729600 76393 23700 1847 0.982 395.0
+## 72    1996   NL  730404 74881 24641 2110 0.979 346.2
+## 73    1997   AL  727134 75785 23477 1843 0.982 394.5
+## 74    1997   NL  729177 74726 24636 1968 0.981 370.5
+## 75    1998   AL  726981 75677 23744 1830 0.982 397.3
+## 76    1998   NL  836639 85990 28045 2198 0.981 380.6
+## 77    1999   AL  722760 75196 23909 1843 0.982 392.2
+## 78    1999   NL  832848 86356 26902 2252 0.981 369.8
+## 79    2000   AL  725076 75840 23709 1812 0.982 400.2
+## 80    2000   NL  831717 86121 26924 2210 0.981 376.3
+## 81    2001   AL  727668 75709 23563 1841 0.982 395.3
+## 82    2001   NL  830676 85662 26790 2072 0.982 400.9
+## 83    2002   AL  725904 75858 23156 1727 0.983 420.3
+## 84    2002   NL  831780 85665 27438 2029 0.982 409.9
+## 85    2003   AL  728100 76132 23467 1713 0.983 425.0
+## 86    2003   NL  831947 85555 27830 1973 0.983 421.7
+## 87    2004   AL  728928 75872 23220 1759 0.983 414.4
+## 88    2004   NL  833256 85623 27428 1943 0.983 428.9
+## 89    2005   AL  726480 75655 23488 1652 0.984 439.8
+## 90    2005   NL  829884 85524 27263 1899 0.983 437.0
+## 91    2006   AL  724356 75371 23504 1594 0.984 454.4
+## 92    2006   NL  832932 86133 26899 1971 0.983 422.6
+## 93    2007   AL  726420 75603 23367 1580 0.984 459.8
+## 94    2007   NL  836912 87105 26632 1902 0.984 440.0
+## 95    2008   AL  728004 75794 23285 1598 0.984 455.6
+## 96    2008   NL  832872 86034 26708 1842 0.984 452.2
+## 97    2009   AL  726240 75794 22652 1524 0.985 476.5
+## 98    2009   NL  831552 85822 26626 1771 0.984 469.5
+## 99    2010   AL  727812 75747 23152 1626 0.984 447.6
+## 100   2010   NL  831180 85534 26471 1844 0.984 450.7
+## 101   2011   AL  547650 60850 22715 1432 0.983 382.4
+## 102   2011   NL  627588 69732 26583 1621 0.983 387.2
+## 103   2012   AL  547695 60855 22561 1347 0.984 406.6
+## 104   2012   NL  622899 69211 26210 1661 0.983 375.0
+</code></pre>
+
+<pre><code class="r">
+</code></pre>
+
+
+<hr><div align="center">[Package <em>Lahman</em> version 2.0-1 <a href="00Index.html">Index</a>]</div>
+</body></html>
