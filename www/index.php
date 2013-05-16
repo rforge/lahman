@@ -55,6 +55,9 @@ echo $contents; } ?>
   <td>
   <a href="doc/Master.html"><img src="doc/figure/Master-unnamed-chunk-1.png" width=160></a>
   </td>
+  <td>
+  <a href="doc/Managers.html"><img src="doc/figure/Managers-unnamed-chunk-12.png" width=160></a>
+  </td>
 </tr>
 </table>
 
