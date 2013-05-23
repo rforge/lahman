@@ -53,7 +53,7 @@ str(schoolStates)
 summary(schoolStates)
 
 \dontrun{
-if(require(zipcode) {
+if(require(zipcode)) {
 	# in lieu of more precise geocoding via schoolName, 
 	# find lat/long of Schools from zipcode file
 	zips <- ddply(zipcode, .(city, state), summarize, latitude=mean(latitude), longitude=mean(longitude))
