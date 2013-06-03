@@ -28,8 +28,8 @@ challenges and opportunities for data processing and visualization in R.
 \tabular{ll}{
 Package: \tab Lahman\cr
 Type: \tab Package\cr
-Version: \tab 2.0-3\cr
-Date: \tab 2013-05-29\cr
+Version: \tab 2.0-4\cr
+Date: \tab 2013-06-03\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 LazyData: \tab yes\cr

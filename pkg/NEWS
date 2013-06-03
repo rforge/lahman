@@ -1,3 +1,6 @@
+Version 2.0-4 (2013-06-04)
+o inst/scripts/readLahman.R now uses compression
+
 Version 2.0-3 (2013-05-29)
 o largest RData files are now compressed via R CMD build --resave-data
 
