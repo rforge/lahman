@@ -61,12 +61,17 @@ echo $contents; } ?>
 </tr>
 </table>
 
+<h3> Team Lahman:  Michael Friendly, Dennis Murphy, Martin Monkman</h3>
 <h2>Contents</h2>
 
 <ul>
   <li>The <strong>R-Forge project summary page</strong> is <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>here</strong></a>.</li>
   <li><a href="doc/">HTML documentation for the Lahman package</a>, with the results of all examples.</li>
-  <li>Other examples, analyses, etc. [none yet]
+  <li><a href="http://bayesball.blogspot.ca/">Martin's Bayes ball blog </a>
+    <ul>
+      <li><a href="http://bayesball.blogspot.ca/2013/06/major-league-baseball-run-scoring.html">
+        Baseball run scoring trends by league</a> (and <a href="https://gist.github.com/MonkmanMH/5711584">gist code</a>)
+    </ul>
 </ul>
 
 
