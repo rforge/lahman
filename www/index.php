@@ -74,7 +74,7 @@ echo $contents; } ?>
     </ul>
   <li>Ramnath Vaidyanathan shows in a blog post how to create an
   <a href="http://rcharts.io/nytinteractive/">interactive graphic of strikeouts
-  per game by team</a> using the <a href=https://github.com/rcharts"rCharts package</a>.
+  per game by team</a> using the <a href="https://github.com/rcharts">rCharts package</a>.
 </ul>
 
 
