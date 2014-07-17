@@ -70,11 +70,15 @@ Master <- within(Master, {
    throws = factor(throws)
 }  )
 
+# Fix non-ASCII characters in the Master.csv file, to avoid CRAN warnings....
 #* checking data for non-ASCII characters ... WARNING
 #  Warning: found non-ASCII string(s)
 #  'named Guillermo VelC!zquez' in object 'Master'
 #  'Martmn Magdaleno Dihigo (Llanos)' in object 'Master'
 
+tools:::showNonASCII(paste0(indir, 'Master.csv'))
+
+# then, fix manually, because I don't know an R way ...
 
 setwd(outdir)
 
