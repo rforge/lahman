@@ -71,6 +71,9 @@ echo $contents; } ?>
     <ul>
       <li><a href="http://bayesball.blogspot.ca/2013/06/major-league-baseball-run-scoring.html">
         Baseball run scoring trends by league</a> (and <a href="https://gist.github.com/MonkmanMH/5711584">gist code</a>)
+      <li>Using the <a href="http://cran.r-project.org/web/packages/dplyr/index.html">ddplyr package</a> for analysis, summary and manipulation
+        of the Lahman Master, Batting and Fielding tables 
+        (<a href="https://gist.github.com/MonkmanMH/3c0da6afd58eb61e2c51">Gist code</a>)
     </ul>
   <li>Ramnath Vaidyanathan shows in a blog post how to create an
   <a href="http://rcharts.io/nytinteractive/">interactive graphic of strikeouts
