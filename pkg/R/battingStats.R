@@ -11,7 +11,7 @@
 #
 
 
-battingStats <- function(data=Batting, 
+battingStats <- function(data=Lahman::Batting, 
 	idvars=c("playerID","yearID","stint","teamID","lgID"),
 	cbind=TRUE) {
     require('plyr')
