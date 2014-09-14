@@ -61,7 +61,7 @@ echo $contents; } ?>
 </tr>
 </table>
 
-<h3> Team Lahman:  Michael Friendly, Dennis Murphy, Martin Monkman</h3>
+<h3> Team Lahman:  Michael Friendly, Dennis Murphy, Martin Monkman, Chris Dalzell</h3>
 <h2>Contents</h2>
 
 <ul>
@@ -78,6 +78,12 @@ echo $contents; } ?>
   <li>Ramnath Vaidyanathan shows in a blog post how to create an
   <a href="http://rcharts.io/nytinteractive/">interactive graphic of strikeouts
   per game by team</a> using the <a href="https://github.com/rcharts">rCharts package</a>.
+  <li>Other baseball visualizations and analyses:</li>
+  	<ul>
+  		<li>An impressive interactive chart of <a href="http://cscheid.net/static/mlb-hall-of-fame-voting/">Hall of Fame voting trajectories</a>.
+  		The original exploratory visualizations were created in R, and then made interactive using <a href="http://d3js.org/">d3</a>
+  		and other javascript libraries.</li>
+  	</ul>
 </ul>
 
 
