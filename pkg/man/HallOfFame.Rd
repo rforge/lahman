@@ -83,6 +83,7 @@ barplot(table(inducted$nyears), main="Number of voting years until election",
 		ylab="Number of players", xlab="Years")
 
 # What is the form of this distribution?
+# Note that this question requires a zero-truncated distribution, because nyears==0 cannot occur
 require('vcd')
 goodfit(inducted$nyears)
 plot(goodfit(inducted$nyears), xlab='Number of years',
